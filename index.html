@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NW午後I CBT模試</title>
 <meta name="description" content="ネットワークスペシャリスト試験 午後I の過去問（令和元年度秋期・令和3年度春期）をCBT形式で解く学習ツール">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,8 +148,13 @@
     background:var(--surface-alt);
     padding:12px 14px;
   }
-  .cover-meta .k{ font-size:11.5px; color:var(--text-muted); letter-spacing:.06em; }
-  .cover-meta .v{ font-size:16px; font-weight:700; margin-top:2px; }
+  .cover-meta .k{ font-size:11.5px; color:var(--text-muted); letter-spacing:.06em; white-space:nowrap; }
+  .cover-meta .v{ font-size:16px; font-weight:700; margin-top:2px; white-space:nowrap; }
+  @media (max-width: 480px){
+    .cover-meta{ grid-template-columns:1fr; }
+    .cover-meta div{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+    .cover-meta .k{ margin-top:0; }
+  }
   .cover-body h2{ font-size:15px; margin:0 0 10px; }
   .rules{ margin:0 0 24px; padding-left:1.3em; color:var(--text-muted); font-size:13.5px; }
   .rules li{ margin-bottom:5px; }
@@ -159,6 +165,9 @@
     grid-template-columns:repeat(3,1fr);
     gap:12px;
     margin-bottom:10px;
+  }
+  @media (max-width: 680px){
+    .pick-grid{ grid-template-columns:1fr; }
   }
   .pick-card{
     border:1.5px solid var(--border-strong);
