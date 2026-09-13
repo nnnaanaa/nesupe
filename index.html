@@ -1,0 +1,1236 @@
+<meta charset="UTF-8">
+<title>NW午後I CBT模試</title>
+<meta name="description" content="令和3年度 春期 ネットワークスペシャリスト試験 午後I をCBT形式で解く模擬試験">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root{
+    --bg:#f2f4fb;
+    --surface:#ffffff;
+    --surface-alt:#c0c9ee;
+    --border:#c7cef0;
+    --border-strong:#a2aadb;
+    --text:#2c2d54;
+    --text-muted:#6a6b9a;
+    --accent:#898ac4;
+    --accent-strong:#5b5c96;
+    --accent-soft:#c0c9ee;
+    --good:#1f9463;
+    --good-soft:#d9f5e6;
+    --warn:#946a17;
+    --warn-soft:#f6ecd6;
+    --danger:#b13030;
+    --danger-soft:#f8dede;
+    --shadow: 0 1px 2px rgba(91,92,150,.10), 0 6px 20px rgba(91,92,150,.12);
+    color-scheme: light;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;
+    font-size:15px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.disp{
+    font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+    text-wrap:balance;
+  }
+  .mono{ font-family:"JetBrains Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+  button{font-family:inherit;}
+  ::selection{ background:var(--accent-soft); }
+  [hidden]{display:none!important;}
+  a{color:var(--accent);}
+
+  button{
+    cursor:pointer;
+    border:1px solid var(--border-strong);
+    background:var(--surface);
+    color:var(--text);
+    border-radius:8px;
+    padding:8px 14px;
+    font-size:14px;
+    font-weight:600;
+    transition:background .12s, border-color .12s, transform .05s;
+  }
+  button:hover{ border-color:var(--accent); }
+  button:active{ transform:translateY(1px); }
+  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, label:focus-within{
+    outline:2.5px solid var(--accent);
+    outline-offset:2px;
+  }
+  button.primary{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
+  button.primary:hover{ background:var(--accent-strong); border-color:var(--accent-strong); }
+  button.ghost{ background:transparent; border-color:transparent; }
+  button.ghost:hover{ background:var(--surface-alt); border-color:transparent; }
+  button:disabled{ opacity:.4; cursor:not-allowed; }
+  button.small{ padding:4px 10px; font-size:12.5px; border-radius:6px; }
+
+  textarea, input[type="text"]{
+    width:100%;
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--text);
+    background:var(--surface);
+    border:1px solid var(--border-strong);
+    border-radius:8px;
+    padding:9px 11px;
+    resize:vertical;
+    line-height:1.6;
+  }
+  textarea:focus, input[type=text]:focus{ outline:2.5px solid var(--accent); outline-offset:1px; border-color:var(--accent); }
+
+  /* ---------- App shell ---------- */
+  #app{ height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
+
+  /* ---------- Cover / start screen ---------- */
+  .cover-wrap{
+    flex:1;
+    min-height:0;
+    overflow:auto;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:56px 20px 80px;
+  }
+  .cover{
+    width:100%;
+    max-width:760px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .cover-band{
+    background:var(--accent-strong);
+    color:#fff;
+    padding:30px 34px 26px;
+  }
+  .cover-band .tag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.12em;
+    background:rgba(255,255,255,.18);
+    padding:4px 10px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  .cover-band h1{
+    margin:0 0 6px;
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:.01em;
+  }
+  .cover-band p{ margin:0; opacity:.92; font-size:14px; }
+  .cover-body{ padding:28px 34px 32px; }
+  .cover-meta{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:26px;
+  }
+  .cover-meta div{
+    background:var(--surface-alt);
+    padding:12px 14px;
+  }
+  .cover-meta .k{ font-size:11.5px; color:var(--text-muted); letter-spacing:.06em; }
+  .cover-meta .v{ font-size:16px; font-weight:700; margin-top:2px; }
+  .cover-body h2{ font-size:15px; margin:0 0 10px; }
+  .rules{ margin:0 0 24px; padding-left:1.3em; color:var(--text-muted); font-size:13.5px; }
+  .rules li{ margin-bottom:5px; }
+  .rules b{ color:var(--text); }
+
+  .pick-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .pick-card{
+    border:1.5px solid var(--border-strong);
+    border-radius:12px;
+    padding:14px 14px 12px;
+    background:var(--surface);
+  }
+  .pick-card.on{ border-color:var(--accent); background:var(--accent-soft); }
+  .pick-card.select{
+    display:block; width:100%; text-align:left; font-weight:400;
+    cursor:pointer; transition:border-color .12s, background .12s, transform .05s;
+  }
+  .pick-card.select:hover{ border-color:var(--accent); background:var(--accent-soft); }
+  .pick-card.select:active{ transform:translateY(1px); }
+  .pick-card .num{
+    font-family:"Zen Kaku Gothic New";
+    font-weight:700;
+    font-size:13px;
+    color:var(--accent-strong);
+    margin-bottom:4px;
+  }
+  .pick-card .ttl{ font-weight:700; font-size:14.5px; margin-bottom:4px; color:var(--text); }
+  .pick-card .desc{ font-size:12.5px; color:var(--text-muted); }
+  .pick-status{
+    display:inline-block; margin-top:10px; font-size:11.5px; font-weight:700;
+    padding:3px 9px; border-radius:999px; background:var(--surface-alt); color:var(--text-muted);
+  }
+  .pick-status.partial{ background:var(--warn-soft); color:var(--warn); }
+  .pick-status.done{ background:var(--good-soft); color:var(--good); }
+
+
+  /* ---------- Exam screen ---------- */
+  .top-bar{
+    position:sticky; top:0; z-index:30;
+    display:flex; align-items:center; gap:10px;
+    padding:9px 18px;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    box-shadow:var(--shadow);
+    flex-wrap:wrap;
+    row-gap:6px;
+  }
+  .top-bar .title{ font-weight:700; font-size:14px; min-width:0; }
+  .top-bar .title small{ display:block; font-weight:500; color:var(--text-muted); font-size:11px; }
+  .top-spacer{ flex:1; min-width:8px; }
+
+  .memo-panel{
+    position:fixed; right:18px; bottom:18px; z-index:50;
+    width:300px; max-width:calc(100vw - 36px);
+    background:var(--surface); border:1.5px solid var(--accent);
+    border-radius:12px; box-shadow:var(--shadow);
+    display:none; flex-direction:column; overflow:hidden;
+  }
+  .memo-panel.open{ display:flex; }
+  .memo-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 10px 8px 14px; background:var(--accent-soft); font-size:13px;
+  }
+  .memo-panel textarea{
+    border:none; border-radius:0; resize:both; min-height:160px; min-width:220px;
+    padding:12px 14px; font-size:13.5px;
+  }
+  .memo-panel textarea:focus{ outline:none; }
+
+  .work-area{
+    flex:1;
+    display:grid;
+    grid-template-columns:minmax(280px,1.15fr) minmax(320px,1fr);
+    min-height:0;
+  }
+  @media (max-width: 880px){
+    .work-area{ grid-template-columns:1fr; grid-template-rows:1fr 1fr; }
+    .pane{ border-right:none; border-bottom:1px solid var(--border); }
+    .pane.right{ border-bottom:none; }
+  }
+
+  .pane{ min-height:0; display:flex; flex-direction:column; border-right:1px solid var(--border); }
+  .pane.right{ border-right:none; }
+  .pane-head{
+    display:flex; align-items:center; gap:8px;
+    padding:8px 14px;
+    border-bottom:1px solid var(--border);
+    background:var(--surface);
+    font-size:12.5px; color:var(--text-muted);
+  }
+  .pane-head b{ color:var(--text); font-size:13px; }
+  .pane-head .spacer{ flex:1; }
+  .zoom-ctl{ display:flex; align-items:center; gap:4px; }
+  .zoom-ctl button{ padding:2px 9px; }
+  .thumbrail{
+    display:flex; gap:6px; padding:8px 10px; overflow-x:auto;
+    background:var(--surface); border-bottom:1px solid var(--border);
+  }
+  .thumbrail button{
+    flex:none; width:30px; height:30px; padding:0; font-size:12px;
+    border-radius:6px; display:flex; align-items:center; justify-content:center;
+  }
+  .thumbrail button.on{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  .page-scroll{
+    flex:1; overflow:auto; background:var(--surface-alt);
+    padding:16px; display:flex; flex-direction:column; align-items:stretch; gap:14px;
+  }
+  .page-frame{ display:flex; justify-content:center; }
+  .page-scroll img{
+    display:block; width:var(--zoom,100%); max-width:none;
+    background:#fff; box-shadow:var(--shadow); border-radius:4px;
+  }
+  .page-num-tag{ font-size:11px; color:var(--text-muted); text-align:center; }
+
+  .answer-scroll{ flex:1; overflow:auto; padding:16px 16px 60px; background:var(--bg); }
+  .mon-group{ margin-bottom:22px; }
+  .mon-group > .mon-title{
+    font-family:"Zen Kaku Gothic New";
+    font-weight:700; font-size:14.5px; color:var(--accent-strong);
+    margin:0 0 10px; padding-bottom:6px; border-bottom:2px solid var(--accent-soft);
+  }
+
+  .qcard{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:13px 15px 14px;
+    margin-bottom:12px;
+    scroll-margin-top:14px;
+  }
+  .qcard.marked{ border-color:var(--warn); box-shadow:0 0 0 1px var(--warn) inset; }
+  .qcard-head{ display:flex; align-items:flex-start; gap:10px; margin-bottom:8px; }
+  .qcard-head .sub{
+    font-family:"JetBrains Mono"; font-weight:700; font-size:12.5px;
+    color:#fff; background:var(--accent); border-radius:6px;
+    padding:2px 7px; margin-top:1px; flex:none;
+  }
+  .qcard-head .prompt{ flex:1; font-size:13.8px; }
+  .qcard-head .flag{
+    flex:none; border:1px solid var(--border-strong); background:transparent;
+    padding:3px 9px; border-radius:7px;
+    font-size:11.5px; font-weight:700; line-height:1.4; color:var(--text-muted);
+  }
+  .qcard-head .flag.on{ color:var(--warn); border-color:var(--warn); background:var(--warn-soft); }
+  .qcard .status-dot{ width:8px; height:8px; border-radius:50%; background:var(--border-strong); flex:none; margin-top:6px; }
+  .qcard.answered .status-dot{ background:var(--good); }
+  .field-row{ margin-top:6px; }
+  .field-row label{ display:block; font-size:11.5px; color:var(--text-muted); margin-bottom:3px; }
+  .counter{ text-align:right; font-size:11px; color:var(--text-muted); margin-top:3px; }
+  .counter.over{ color:var(--danger); font-weight:700; }
+  .field-pair{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media (max-width:520px){ .field-pair{ grid-template-columns:1fr; } }
+
+  .opt-grid{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .opt-chip{
+    display:flex; align-items:center; gap:6px;
+    border:1.5px solid var(--border-strong);
+    border-radius:8px; padding:5px 10px; font-size:12.8px;
+    background:var(--surface); cursor:pointer; user-select:none;
+  }
+  .opt-chip input{ accent-color:var(--accent); }
+  .opt-chip.checked{ border-color:var(--accent); background:var(--accent-soft); }
+  .opt-chip.disabled{ opacity:.4; cursor:not-allowed; }
+  .opt-hint{ font-size:11px; color:var(--text-muted); margin-top:4px; }
+  .opt-hint b{ color:var(--accent); }
+
+  .bottom-bar{
+    display:flex; align-items:center; gap:10px;
+    padding:9px 16px;
+    background:var(--surface);
+    border-top:1px solid var(--border);
+    position:sticky; bottom:0;
+  }
+  .bottom-bar .stat{ font-size:12.5px; color:var(--text-muted); }
+  .bottom-bar .stat b{ color:var(--text); }
+  .legend{ display:flex; gap:12px; margin-left:14px; font-size:11.5px; color:var(--text-muted); }
+  .legend i{ width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:4px; }
+  .legend .lg-done i{ background:var(--good); }
+  .legend .lg-mark i{ background:var(--warn); }
+  .legend .lg-open i{ background:var(--border-strong); }
+
+  /* ---------- Review screen ---------- */
+  .review-wrap{ flex:1; min-height:0; overflow:auto; padding:26px 20px 70px; display:flex; justify-content:center; }
+  .review-inner{ width:100%; max-width:900px; }
+  .review-inner h1{ font-size:21px; margin:0 0 4px; }
+  .review-inner > p{ color:var(--text-muted); font-size:13.5px; margin:0 0 22px; }
+  .rv-problem{ margin-bottom:22px; }
+  .rv-problem h2{
+    font-size:15px; display:flex; align-items:center; gap:10px; margin:0 0 10px;
+  }
+  .rv-problem h2 .cnt{ font-size:12px; font-weight:600; color:var(--text-muted); }
+  .rv-list{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; }
+  .rv-chip{
+    display:flex; align-items:center; gap:7px;
+    border:1px solid var(--border); border-radius:8px;
+    padding:8px 10px; font-size:12.5px; background:var(--surface);
+    cursor:pointer; text-align:left;
+  }
+  .rv-chip .status-dot{ width:8px; height:8px; border-radius:50%; background:var(--border-strong); flex:none; }
+  .rv-chip.done .status-dot{ background:var(--good); }
+  .rv-chip.marked{ border-color:var(--warn); }
+  .rv-chip .mk{ margin-left:auto; color:var(--warn); font-size:13px; }
+
+  .finish-cta{
+    margin-top:30px; padding-top:20px; border-top:1px solid var(--border);
+    display:flex; align-items:center; gap:14px;
+  }
+
+  /* ---------- Result screen ---------- */
+  .result-wrap{ flex:1; min-height:0; overflow:auto; padding:30px 20px 80px; display:flex; justify-content:center; }
+  .result-inner{ width:100%; max-width:820px; }
+  .result-inner h1{ font-size:22px; margin:0 0 6px; }
+  .result-note{
+    background:var(--accent-soft); border:1px solid var(--accent); border-radius:10px;
+    padding:14px 16px; font-size:13px; color:var(--text); margin:16px 0 26px; line-height:1.7;
+  }
+  .rq{
+    border:1px solid var(--border); border-radius:10px; padding:12px 15px; margin-bottom:10px; background:var(--surface);
+  }
+  .rq .sub{ font-family:"JetBrains Mono"; font-weight:700; color:var(--accent); font-size:12px; }
+  .rq .prompt{ font-size:13px; color:var(--text-muted); margin:4px 0 8px; }
+  .rq .ans{ font-size:14px; white-space:pre-wrap; background:var(--surface-alt); border-radius:7px; padding:8px 10px; }
+  .rq .ans.empty{ color:var(--text-muted); font-style:italic; }
+  .rq .ans-label{ font-size:11px; color:var(--text-muted); font-weight:700; letter-spacing:.03em; margin-bottom:4px; }
+  .rq .corr-label{ margin-top:10px; color:var(--good); }
+  .rq .corr-input{ font-size:13.5px; background:var(--good-soft); border-color:var(--good); }
+  .rq .corr-input:focus{ outline-color:var(--good); border-color:var(--good); }
+  .rq .ans.corr-display{ background:var(--good-soft); }
+  .result-actions{ display:flex; gap:12px; margin:26px 0 10px; flex-wrap:wrap; }
+  .hist-entry{
+    border:1px solid var(--border); border-radius:10px; background:var(--surface);
+    margin-bottom:10px; overflow:hidden;
+  }
+  .hist-entry summary{
+    cursor:pointer; padding:11px 15px; font-size:13.5px; font-weight:700; color:var(--accent-strong);
+    list-style:none;
+  }
+  .hist-entry summary::-webkit-details-marker{ display:none; }
+  .hist-entry summary:before{ content:"▸ "; color:var(--text-muted); }
+  .hist-entry[open] summary:before{ content:"▾ "; }
+  .hist-body{ padding:0 15px 15px; border-top:1px solid var(--border); }
+  .hist-transcript{ min-height:120px; font-size:12.5px; }
+  .toast{
+    position:fixed; bottom:22px; left:50%; transform:translateX(-50%);
+    background:var(--accent-strong); color:#fff; padding:9px 18px; border-radius:999px;
+    font-size:13px; font-weight:600; box-shadow:var(--shadow); z-index:99;
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(-6px); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none!important; animation:none!important; } }
+</style>
+
+<div id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================= DATA ============================= */
+  var PROBLEMS = [
+    {
+      id:1, label:"問1", title:"ネットワーク運用管理の自動化",
+      lede:"中古車販売業A社の在庫管理システム更改。RTによるL2 over IPトンネルとLLDPを用いた構成管理自動化がテーマ。",
+      pages:[2,3,4,5,6,7],
+      groups:[
+        { mon:"設問1", note:"〔現状の在庫管理システム〕について", items:[
+          {id:"p1-1-1", sub:"(1)", type:"text", limit:0,
+            prompt:"名前解決に用いるサーバのIPアドレスを、在庫管理端末に通知するサーバは何か。図1中の機器名で答えよ。"},
+          {id:"p1-1-2", sub:"(2)", type:"text", limit:0,
+            prompt:"図1の構成において、在庫管理システムのセグメントのIPアドレス数に着目すると、店舗の最大数は計算上幾つになるか。整数で答えよ。"},
+          {id:"p1-1-3", sub:"(3)", type:"text", limit:30,
+            prompt:"本社のL2SWのMACアドレステーブルに何も学習されていない場合、在庫管理サーバが監視のために送信したユニキャストのICMP Echo requestは、本社のL2SWでどのように転送されるか。30字以内で述べよ。このとき、監視対象機器に対するIPアドレスとMACアドレスの対応は在庫管理サーバのARPテーブルに保持されているものとする。"}
+        ]},
+        { mon:"設問2", note:"〔新ネットワークの設計〕について", items:[
+          {id:"p1-2-1", sub:"(1)", type:"text", limit:50,
+            prompt:"C社がRTを出荷するとき、RTにRT管理コントローラをIPアドレスではなくFQDNで記述する利点は何か。50字以内で述べよ。"},
+          {id:"p1-2-2", sub:"(2)", type:"text", limit:0,
+            prompt:"本文中の下線①について、RTがRT管理コントローラに登録する際に用いる、OSI基本参照モデルでアプリケーション層に属するプロトコルを答えよ。"},
+          {id:"p1-2-3", sub:"(3)", type:"text", limit:0,
+            prompt:"本文中の下線②について、店舗の在庫管理端末から運用管理サーバにtracerouteコマンドを実行すると、どの機器のIPアドレスが表示されるか。図3中の機器名で全て答えよ。"},
+          {id:"p1-2-4", sub:"(4)", type:"text", limit:30,
+            prompt:"図3において、全店舗のWi-Fi APから送られてくるログを受信するサーバを追加で設置する場合に、本社には設置することができないのはなぜか。ネットワーク設計の観点から、30字以内で述べよ。"}
+        ]},
+        { mon:"設問3", note:"〔構成管理の自動化〕について", items:[
+          {id:"p1-3-1", sub:"(1)", type:"text", limit:0,
+            prompt:"本文中の［ a ］に入れる適切な数値を答えよ。（OSI基本参照モデルの層番号）"},
+          {id:"p1-3-2", sub:"(2)", type:"fields", limit:0,
+            prompt:"本文中の［ b ］に入れる適切なプロトコル名及び［ c ］に入れる適切な機器名を、本文中の字句を用いて答えよ。",
+            fields:[{key:"b",label:"b：プロトコル名"},{key:"c",label:"c：機器名"}]},
+          {id:"p1-3-3", sub:"(3)", type:"text", limit:25,
+            prompt:"本文中の下線③について、情報システム部は、何がどのような状態であるという確認を行うか。25字以内で述べよ。ただし、機器などの物品は事前に検品され、初期不良や故障はないものとする。"},
+          {id:"p1-3-4", sub:"(4)", type:"multi", limit:0, selectCount:3,
+            prompt:"図3において、情報システム部の管理外のL2SW機器（以下、L2SW-Xという）がL2SW01のIF2と在庫管理端末011のIF1の間に接続されたとき、表1はどのようになるか。適切なものを解答群の中から三つ選び、記号で答えよ。L2SW-XはLLDPが有効になっているが、管理用IPアドレスは情報システム部で把握していないものとする。また、接続の前後で行番号の順序に変更はないものとする。",
+            options:[
+              ["ア","行番号3が削除される。"],
+              ["イ","行番号3の隣接機器名が変更される。"],
+              ["ウ","行番号5が削除される。"],
+              ["エ","行番号5の隣接機器名が変更される。"],
+              ["オ","自機器名L2SW-Xの行が存在する。"],
+              ["カ","隣接機器名L2SW-Xの行が存在する。"]
+            ]}
+        ]}
+      ]
+    },
+    {
+      id:2, label:"問2", title:"企業ネットワークの統合",
+      lede:"商社D社によるグループ企業E社の吸収合併に伴うネットワーク統合。OSPFエリア設計と経路集約の扱いがテーマ。",
+      pages:[8,9,10,11,12,13],
+      groups:[
+        { mon:"設問1", note:"本文中の空欄に入れる適切な字句を答えよ。", items:[
+          {id:"p2-1-a", sub:"a", type:"text", limit:0, prompt:"「IPsec VPN認証用の事前［ a ］」の a に入る字句。"},
+          {id:"p2-1-b", sub:"b", type:"text", limit:0, prompt:"「Type1のLSAは［ b ］LSAと呼ばれ、OSPFエリア内の［ b ］に関する情報である」の b に入る字句。"},
+          {id:"p2-1-c", sub:"c", type:"text", limit:0, prompt:"「その情報には［ c ］と呼ばれるメトリック値などが含まれている」の c に入る字句。"},
+          {id:"p2-1-d", sub:"d", type:"text", limit:0, prompt:"「集められたLSAの情報を基にして［ d ］アルゴリズムを用いた最短経路計算を行う」の d に入る字句。"},
+          {id:"p2-1-e", sub:"e", type:"text", limit:0, prompt:"「支社個別経路が一つに集約された［ e ］/16を宛先とする経路が確認できる」の e に入る字句。"}
+        ]},
+        { mon:"設問2", note:"本文中の下線①について", items:[
+          {id:"p2-2-1", sub:"", type:"text", limit:25,
+            prompt:"下線①「全社のOSPFエリアからインターネットへのアクセスを可能にするための設定」について、設定の内容を25字以内で述べよ。"}
+        ]},
+        { mon:"設問3", note:"〔OSPFによる経路制御〕について", items:[
+          {id:"p2-3-1", sub:"(1)", type:"text", limit:25,
+            prompt:"本文中の下線②について、この機能（経路集約機能）を使って経路を集約する目的を25字以内で述べよ。"},
+          {id:"p2-3-2", sub:"(2)", type:"text", limit:0,
+            prompt:"本文中の下線③について、経路集約を設定している機器を図1中の機器名で答えよ。"},
+          {id:"p2-3-3", sub:"(3)", type:"text", limit:0,
+            prompt:"本文中の下線④について、ルーティングループが発生する可能性があるのは、どの機器とどの機器の間か。二つの機器を図1中の機器名で答えよ。"},
+          {id:"p2-3-4", sub:"(4)", type:"fields", limit:0,
+            prompt:"表2中の［ f ］、［ g ］に入れる適切な字句を答えよ。",
+            fields:[{key:"f",label:"f：設定機器"},{key:"g",label:"g：宛先ネットワークアドレス"}]}
+        ]},
+        { mon:"設問4", note:"〔D社とE社のネットワーク統合の検討〕について", items:[
+          {id:"p2-4-1", sub:"(1)", type:"multi", limit:0, selectCount:0,
+            prompt:"本文中の下線⑤について、到達できないD社内ネットワーク部分を、図2中のa～lの記号で全て答えよ。",
+            options:[["a","a"],["b","b"],["c","c"],["d","d"],["e","e"],["f","f"],["g","g"],["h","h"],["i","i"],["j","j"],["k","k"],["l","l"]]},
+          {id:"p2-4-2", sub:"(2)", type:"fields", limit:0,
+            prompt:"本文中の下線⑥について、フロア間OSPF追加設定を行う必要がある二つの機器を答えよ。また、その設定内容を25字以内で述べよ。",
+            fields:[{key:"dev",label:"機器（二つ）"},{key:"desc",label:"設定内容（25字以内）",limit:25}]},
+          {id:"p2-4-3", sub:"(3)", type:"fields", limit:0,
+            prompt:"本文中の下線⑦について、設定が必要なネットワーク機器を答えよ。また、その設定内容を40字以内で述べよ。",
+            fields:[{key:"dev",label:"機器"},{key:"desc",label:"設定内容（40字以内）",limit:40}]}
+        ]}
+      ]
+    },
+    {
+      id:3, label:"問3", title:"通信品質の確保",
+      lede:"商社Y社のクラウド音声サービス導入。VoIPの帯域計算とレイヤ2/レイヤ3優先制御（PQ・WRR・DSCP）がテーマ。",
+      pages:[14,15,16,17,18],
+      groups:[
+        { mon:"設問1", note:"本文中の空欄に入れる適切な字句又は数値を答えよ。", items:[
+          {id:"p3-1-a", sub:"a", type:"text", limit:0, prompt:"「CS-ACELPのビットレートは［ a ］kビット/秒である」の a に入る数値。"},
+          {id:"p3-1-b", sub:"b", type:"text", limit:0, prompt:"「イーサネットフレームヘッダのほか、IP、［ b ］及びRTPヘッダが付加される」の b に入る字句。"},
+          {id:"p3-1-c", sub:"c", type:"text", limit:0, prompt:"「大量の動画パケットがL3SW0に入力されたことで音声パケットの遅延又は［ c ］が発生した」の c に入る字句。"},
+          {id:"p3-1-d", sub:"d", type:"text", limit:0, prompt:"「CoS値に対応したDSCP値をIPヘッダの［ d ］フィールドを再定義した6ビットにマーキングする」の d に入る字句。"}
+        ]},
+        { mon:"設問2", note:"〔現状の調査〕について", items:[
+          {id:"p3-2-1", sub:"(1)", type:"text", limit:0,
+            prompt:"図1において、音声信号がIPパケット化される通話はどのような通話か。本文中の字句を用いて答えよ。"},
+          {id:"p3-2-2", sub:"(2)", type:"text", limit:20,
+            prompt:"図1中のIP-GWは、音声パケットのジッタを吸収するためのバッファをもっている。しかし、バッファを大きくし過ぎるとスムーズな会話ができなくなる。その理由を、パケットという字句を用いて、20字以内で述べよ。"}
+        ]},
+        { mon:"設問3", note:"〔電話サービス導入後のネットワーク構成〕について", items:[
+          {id:"p3-3-1", sub:"(1)", type:"text", limit:0,
+            prompt:"図1中に示した現在の回線数を維持する場合、図2中のL3SW0のポートaから出力される音声パケットの通信量の最大値を、kビット/秒で答えよ。"},
+          {id:"p3-3-2", sub:"(2)", type:"text", limit:20,
+            prompt:"本文中の下線①のL2SWに、PoE未対応の機器を誤って接続した場合の状態について、PoEの機能に着目し、20字以内で述べよ。"}
+        ]},
+        { mon:"設問4", note:"〔電話サービスで発生した問題と対策〕について", items:[
+          {id:"p3-4-1", sub:"(1)", type:"text", limit:30,
+            prompt:"本文中の下線②について、レイヤ2のCoS値を基にした優先制御にはタグVLANが必要になる。その理由を、30字以内で述べよ。"},
+          {id:"p3-4-2", sub:"(2)", type:"text", limit:0,
+            prompt:"優先制御の設定後、L3SW0の内部のルータに新たに作成されるVLANインタフェースの数を答えよ。"},
+          {id:"p3-4-3", sub:"(3)", type:"text", limit:20,
+            prompt:"本文中の下線③の処理が行われたとき、キュー1に音声フレームが残っていなくても、キュー1に入った音声フレームの出力が待たされることがある。音声フレームの出力が待たされるのはどのような場合か。20字以内で答えよ。このとき、L2SWの内部処理時間は無視できるものとする。"},
+          {id:"p3-4-4", sub:"(4)", type:"fields", limit:0,
+            prompt:"本文中の［ ア ］、［ イ ］に入れるポートを、図2中のa～jの中から全て答えよ（複数選択可）。",
+            fields:[
+              {key:"ア",label:"ア", type:"multi", options:[["a","a"],["b","b"],["c","c"],["d","d"],["e","e"],["f","f"],["g","g"],["h","h"],["i","i"],["j","j"]]},
+              {key:"イ",label:"イ", type:"multi", options:[["a","a"],["b","b"],["c","c"],["d","d"],["e","e"],["f","f"],["g","g"],["h","h"],["i","i"],["j","j"]]}
+            ]},
+          {id:"p3-4-5", sub:"(5)", type:"text", limit:35,
+            prompt:"本文中の下線④について、eLNパケットをDパケットと異なるキュー2に入れる目的を、35字以内で述べよ。"}
+        ]}
+      ]
+    }
+  ];
+
+  var STORE_KEY = "nw-r03h-pm1-cbt-mock-v3";
+
+  /* ============================= STATE ============================= */
+  var state = {
+    screen:"cover",
+    current:null,
+    answers:{},
+    marked:{},
+    memos:{},
+    history:{},
+    correct:{}
+  };
+  (function hydrate(){
+    var saved=null;
+    try{ var raw=localStorage.getItem(STORE_KEY); if(raw) saved=JSON.parse(raw); }catch(e){}
+    if(saved){
+      state.answers = saved.answers || {};
+      state.marked = saved.marked || {};
+      state.memos = saved.memos || {};
+      state.history = saved.history || {};
+      state.correct = saved.correct || {};
+    }
+  })();
+  var zoomLevel = 100;
+  var memoOpen = false;
+  var resumeScroll = false;
+  var HISTORY_LIMIT = 20;
+
+  function save(){
+    try{
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        answers:state.answers, marked:state.marked, memos:state.memos, history:state.history, correct:state.correct
+      }));
+    }catch(e){}
+  }
+  function clearProblemData(problemId){
+    var prefix = 'p'+problemId+'-';
+    Object.keys(state.answers).forEach(function(id){ if(id.indexOf(prefix)===0) delete state.answers[id]; });
+    Object.keys(state.marked).forEach(function(id){ if(id.indexOf(prefix)===0) delete state.marked[id]; });
+    delete state.memos[problemId];
+    save();
+  }
+  function snapshotAnswers(problem){
+    var out={};
+    allItems(problem).forEach(function(it){
+      if(state.answers[it.id]!=null) out[it.id]=JSON.parse(JSON.stringify(state.answers[it.id]));
+    });
+    return out;
+  }
+  function pushHistory(problem){
+    var snap = snapshotAnswers(problem);
+    if(!Object.keys(snap).length) return;
+    var list = state.history[problem.id] || [];
+    var lastJson = list.length ? JSON.stringify(list[0].answers) : null;
+    if(lastJson===JSON.stringify(snap)) return;
+    list.unshift({ts:Date.now(), answers:snap});
+    if(list.length>HISTORY_LIMIT) list = list.slice(0,HISTORY_LIMIT);
+    state.history[problem.id]=list;
+    save();
+  }
+  function fmtDateTime(ts){
+    var d=new Date(ts);
+    function p(n){ return (n<10?'0':'')+n; }
+    return d.getFullYear()+'/'+p(d.getMonth()+1)+'/'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+  }
+
+  function findProblem(id){ for(var i=0;i<PROBLEMS.length;i++){ if(PROBLEMS[i].id===id) return PROBLEMS[i]; } return null; }
+  function allItems(problem){
+    var out=[];
+    problem.groups.forEach(function(g){ g.items.forEach(function(it){ out.push(it); }); });
+    return out;
+  }
+  function isAnswered(it){
+    var v = state.answers[it.id];
+    if(v==null) return false;
+    if(it.type==="text") return String(v).trim().length>0;
+    if(it.type==="multi") return Array.isArray(v) && v.length>0;
+    if(it.type==="fields"){
+      if(!v) return false;
+      return it.fields.some(function(f){
+        var fv=v[f.key];
+        if(f.type==="multi") return Array.isArray(fv)&&fv.length>0;
+        return fv && String(fv).trim().length>0;
+      });
+    }
+    return false;
+  }
+  function progressOf(problem){
+    var items = allItems(problem);
+    var done = items.filter(isAnswered).length;
+    return {done:done, total:items.length};
+  }
+  function ucount(str){ return Array.from(String(str||"")).length; }
+
+  function toast(msg){
+    var t=document.getElementById("toast");
+    t.textContent=msg;
+    t.classList.add("show");
+    clearTimeout(toast._h);
+    toast._h=setTimeout(function(){ t.classList.remove("show"); },1800);
+  }
+
+  /* ============================= RENDER: COVER ============================= */
+  function renderCover(root){
+    var html = '';
+    html += '<div class="cover-wrap"><div class="cover">';
+    html += '<div class="cover-band"><span class="tag">CBT方式 学習モード</span>';
+    html += '<h1>令和3年度 春期 ネットワークスペシャリスト試験</h1>';
+    html += '<p>午後I 問題（記述式） — CBT形式の画面で1問ずつ演習できる学習用ツール</p></div>';
+    html += '<div class="cover-body">';
+    html += '<div class="cover-meta">';
+    html += '<div><div class="k">出題数</div><div class="v">問1〜問3</div></div>';
+    html += '<div><div class="k">解答方式</div><div class="v">記述式</div></div>';
+    html += '<div><div class="k">採点</div><div class="v">自己採点</div></div>';
+    html += '</div>';
+
+    html += '<h2>注意事項</h2>';
+    html += '<ul class="rules">';
+    html += '<li>本問題は<b>紙の過去問題（令和3年度春期 NW午後I）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
+    html += '<li>下から<b>1問ずつ選んで</b>演習できます。途中で他の問題に切り替えても、それぞれの解答は個別に保存されます。</li>';
+    html += '<li>解答は自動的にこの端末（ブラウザ）に保存されます。閉じても続きから再開できます。</li>';
+    html += '<li>本ツールに採点機能はありません。学習後に表示される解答一覧を、IPA公式サイトで公開されている解答例と照らして自己採点してください。</li>';
+    html += '</ul>';
+
+    html += '<h2>解く問題を選んでください</h2>';
+    html += '<div class="pick-grid">';
+    PROBLEMS.forEach(function(p){
+      var pr = progressOf(p);
+      var statusText = pr.done===0 ? '未着手' : (pr.done>=pr.total ? '解答済み' : pr.done+' / '+pr.total+' 解答済み');
+      var statusClass = pr.done===0 ? '' : (pr.done>=pr.total ? 'done' : 'partial');
+      html += '<button class="pick-card select" data-select="'+p.id+'">';
+      html += '<div class="num">'+p.label+'</div>';
+      html += '<div class="ttl">'+p.title+'</div>';
+      html += '<div class="desc">'+p.lede+'</div>';
+      html += '<div class="pick-status '+statusClass+'">'+statusText+'</div>';
+      html += '</button>';
+    });
+    html += '</div>';
+
+    html += '<div style="font-size:12.5px;color:var(--text-muted);margin-top:14px;">時間の計測はありません。自分のペースで解答できます。</div>';
+
+    html += '</div></div></div>';
+    root.innerHTML = html;
+
+    root.querySelectorAll('[data-select]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pid = Number(btn.getAttribute('data-select'));
+        var pr = progressOf(findProblem(pid));
+        state.current = pid;
+        state.screen = "exam";
+        zoomLevel = 100;
+        resumeScroll = pr.done>0 && pr.done<pr.total;
+        save();
+        render();
+      });
+    });
+  }
+
+  /* ============================= RENDER: EXAM ============================= */
+  var currentPageIdx = {};
+
+  function inputChanged(it, value, fieldKey){
+    if(fieldKey){
+      var obj = state.answers[it.id] || {};
+      obj[fieldKey]=value;
+      state.answers[it.id]=obj;
+    } else {
+      state.answers[it.id]=value;
+    }
+    save();
+  }
+
+  function renderTextField(it, opts){
+    opts = opts||{};
+    var val = opts.value!=null?opts.value:"";
+    var limit = opts.limit!=null?opts.limit:it.limit;
+    var big = !limit || limit>=15;
+    var idAttr = opts.id;
+    var html;
+    if(big){
+      html = '<textarea rows="'+(limit && limit<=30?2:3)+'" id="'+idAttr+'" data-ans="1">'+escapeHtml(val)+'</textarea>';
+    } else {
+      html = '<input type="text" id="'+idAttr+'" data-ans="1" value="'+escapeHtml(val)+'">';
+    }
+    return html;
+  }
+  function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  function renderMultiOptions(it, selectedArr, groupId, selectCount){
+    selectedArr = selectedArr||[];
+    var atLimit = selectCount>0 && selectedArr.length>=selectCount;
+    var html='<div class="opt-grid" data-group="'+groupId+'">';
+    it.options.forEach(function(pair){
+      var key=pair[0], text=pair[1];
+      var checked = selectedArr.indexOf(key)>=0;
+      var disabled = (!checked && atLimit);
+      html += '<label class="opt-chip'+(checked?' checked':'')+(disabled?' disabled':'')+'">';
+      html += '<input type="checkbox" value="'+key+'" '+(checked?'checked':'')+(disabled?' disabled':'')+' data-multi="'+groupId+'">';
+      html += '<span>'+escapeHtml(text===key?key:(key+"："+text))+'</span></label>';
+    });
+    html+='</div>';
+    if(selectCount>0){
+      html += '<div class="opt-hint">'+selectedArr.length+' / '+selectCount+' 個選択中'+(atLimit?'（上限に達しました。解除すると他を選べます）':'')+'</div>';
+    } else {
+      html += '<div class="opt-hint">該当するものを全て選択（'+selectedArr.length+'個選択中）</div>';
+    }
+    return html;
+  }
+
+  function renderQCard(it){
+    var answered = isAnswered(it);
+    var marked = !!state.marked[it.id];
+    var html = '<div class="qcard'+(answered?' answered':'')+(marked?' marked':'')+'" id="card-'+it.id+'">';
+    html += '<div class="qcard-head"><span class="status-dot"></span>';
+    if(it.sub) html+='<span class="sub">'+escapeHtml(it.sub)+'</span>';
+    html += '<span class="prompt">'+escapeHtml(it.prompt)+'</span>';
+    html += '<button class="flag'+(marked?' on':'')+'" data-mark="'+it.id+'" title="見直しにマークする" aria-pressed="'+marked+'">'+(marked?'見直し中':'見直し')+'</button>';
+    html += '</div>';
+
+    if(it.type==="text"){
+      var val = state.answers[it.id]||"";
+      html += '<div class="field-row">'+renderTextField(it,{id:"in-"+it.id, value:val});
+      if(it.limit){
+        var n=ucount(val);
+        html += '<div class="counter'+(n>it.limit?' over':'')+'">'+n+' / '+it.limit+'字</div>';
+      }
+      html += '</div>';
+    } else if(it.type==="multi"){
+      html += renderMultiOptions(it, state.answers[it.id]||[], it.id, it.selectCount||0);
+    } else if(it.type==="fields"){
+      var fv = state.answers[it.id]||{};
+      html += '<div class="field-pair">';
+      it.fields.forEach(function(f){
+        html += '<div class="field-row"><label>'+escapeHtml(f.label)+'</label>';
+        if(f.type==="multi"){
+          html += renderMultiOptions(f, fv[f.key]||[], it.id+"__"+f.key, 0);
+        } else {
+          html += renderTextField(it,{id:"in-"+it.id+"__"+f.key, value:fv[f.key]||"", limit:f.limit});
+          if(f.limit){
+            var nn=ucount(fv[f.key]||"");
+            html += '<div class="counter'+(nn>f.limit?' over':'')+'">'+nn+' / '+f.limit+'字</div>';
+          }
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function renderAnswerPane(problem){
+    var html='';
+    problem.groups.forEach(function(g){
+      html += '<div class="mon-group"><div class="mon-title">'+escapeHtml(g.mon)+(g.note?'　'+escapeHtml(g.note):'')+'</div>';
+      g.items.forEach(function(it){ html+=renderQCard(it); });
+      html += '</div>';
+    });
+    return html;
+  }
+
+  function bindAnswerPane(container, problem){
+    container.querySelectorAll('[data-ans]').forEach(function(el){
+      el.addEventListener('input', function(){
+        var id = el.id.replace(/^in-/,'');
+        var parts = id.split('__');
+        if(parts.length===2){ inputChanged({id:parts[0]}, el.value, parts[1]); }
+        else { inputChanged({id:id}, el.value); }
+        refreshLiveBits(container, problem);
+      });
+    });
+    container.querySelectorAll('[data-multi]').forEach(function(el){
+      el.addEventListener('change', function(){
+        var group = el.getAttribute('data-multi');
+        var parts = group.split('__');
+        var itemId = parts[0], fieldKey = parts[1];
+        var boxes = container.querySelectorAll('[data-multi="'+cssEscape(group)+'"]');
+        var picked=[];
+        boxes.forEach(function(b){ if(b.checked) picked.push(b.value); });
+        if(fieldKey){ inputChanged({id:itemId}, picked, fieldKey); }
+        else { inputChanged({id:itemId}, picked); }
+
+        // update this option group's disabled-state / hint in place (no full re-render, keeps scroll position)
+        var it=null;
+        problem.groups.forEach(function(g){ g.items.forEach(function(x){ if(x.id===itemId) it=x; }); });
+        var selectCount = (it && !fieldKey && it.type==="multi") ? (it.selectCount||0) : 0;
+        var atLimit = selectCount>0 && picked.length>=selectCount;
+        var optGrid = boxes.length ? boxes[0].closest('.opt-grid') : null;
+        if(optGrid){
+          optGrid.querySelectorAll('.opt-chip').forEach(function(label){
+            var box = label.querySelector('input[type=checkbox]');
+            var checked = box.checked;
+            var disabled = (!checked && atLimit);
+            box.disabled = disabled;
+            label.classList.toggle('checked', checked);
+            label.classList.toggle('disabled', disabled);
+          });
+          var hint = optGrid.nextElementSibling;
+          if(hint && hint.classList.contains('opt-hint')){
+            hint.textContent = selectCount>0
+              ? (picked.length+' / '+selectCount+' 個選択中'+(atLimit?'（上限に達しました。解除すると他を選べます）':''))
+              : ('該当するものを全て選択（'+picked.length+'個選択中）');
+          }
+        }
+        refreshLiveBits(container, problem);
+      });
+    });
+    container.querySelectorAll('[data-mark]').forEach(function(el){
+      el.addEventListener('click', function(){
+        var id = el.getAttribute('data-mark');
+        state.marked[id] = !state.marked[id];
+        save();
+        var marked = state.marked[id];
+        el.classList.toggle('on', marked);
+        el.setAttribute('aria-pressed', marked);
+        el.textContent = marked ? '見直し中' : '見直し';
+        var card = document.getElementById('card-'+id);
+        if(card) card.classList.toggle('marked', marked);
+      });
+    });
+  }
+  function cssEscape(s){ return s.replace(/[^a-zA-Z0-9_-]/g, function(c){return '\\'+c;}); }
+
+  function refreshLiveBits(container, problem){
+    // update char counters + status dot + answered class without full rerender (keeps caret position)
+    container.querySelectorAll('.qcard').forEach(function(card){
+      var id = card.id.replace(/^card-/,'');
+      var it = null;
+      problem.groups.forEach(function(g){ g.items.forEach(function(x){ if(x.id===id) it=x; }); });
+      if(!it) return;
+      var ans = isAnswered(it);
+      card.classList.toggle('answered', ans);
+    });
+    // counters
+    container.querySelectorAll('textarea, input[type=text]').forEach(function(inp){
+      var wrap = inp.closest('.field-row');
+      if(!wrap) return;
+      var counter = wrap.querySelector('.counter');
+      if(!counter) return;
+      var limitMatch = counter.textContent.match(/\/\s*(\d+)/);
+      var limit = limitMatch?Number(limitMatch[1]):0;
+      var n = Array.from(inp.value).length;
+      counter.textContent = n+' / '+limit+'字';
+      counter.classList.toggle('over', n>limit);
+    });
+    var bd = document.getElementById('bottomDone');
+    if(bd){ var pr=progressOf(problem); bd.textContent = pr.done+' / '+pr.total; }
+  }
+
+  function renderPagePane(problem, host){
+    var html='';
+    html += '<div class="pane-head"><b>問題冊子</b><span>（'+problem.pages.length+'ページ）</span>';
+    html += '<div class="spacer"></div>';
+    html += '<div class="zoom-ctl"><button class="ghost small" id="zoomOut">－</button><span class="mono" style="font-size:12px;min-width:38px;text-align:center;display:inline-block;">'+zoomLevel+'%</span><button class="ghost small" id="zoomIn">＋</button></div>';
+    html += '</div>';
+    html += '<div class="thumbrail" id="thumbRail">';
+    problem.pages.forEach(function(pg,i){
+      html += '<button data-jump="'+pg+'" class="'+(i===0?'on':'')+'">'+(i+1)+'</button>';
+    });
+    html += '</div>';
+    html += '<div class="page-scroll" id="pageScroll" style="--zoom:'+zoomLevel+'%">';
+    problem.pages.forEach(function(pg){
+      var f = pg<10?('0'+pg):(''+pg);
+      html += '<div class="page-frame" data-page="'+pg+'"><img src="pages/'+f+'.png" alt="問題冊子 '+pg+'ページ" loading="lazy"></div>';
+      html += '<div class="page-num-tag">p.'+pg+'</div>';
+    });
+    html += '</div>';
+    host.innerHTML = html;
+
+    var scrollEl = host.querySelector('#pageScroll');
+    host.querySelectorAll('[data-jump]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pg = btn.getAttribute('data-jump');
+        var target = scrollEl.querySelector('[data-page="'+pg+'"]');
+        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+    host.querySelector('#zoomIn').addEventListener('click', function(){
+      zoomLevel = Math.min(200, zoomLevel+20);
+      scrollEl.style.setProperty('--zoom', zoomLevel+'%');
+      host.querySelector('.zoom-ctl span').textContent = zoomLevel+'%';
+    });
+    host.querySelector('#zoomOut').addEventListener('click', function(){
+      zoomLevel = Math.max(60, zoomLevel-20);
+      scrollEl.style.setProperty('--zoom', zoomLevel+'%');
+      host.querySelector('.zoom-ctl span').textContent = zoomLevel+'%';
+    });
+  }
+
+  function renderExam(){
+    var root = document.getElementById('app');
+    var problem = findProblem(state.current);
+    var pr = progressOf(problem);
+
+    var html='';
+    html += '<div class="top-bar">';
+    html += '<button class="ghost small" id="btnHome" title="問題選択に戻る">← 問題選択</button>';
+    html += '<div class="title">'+problem.label+' '+escapeHtml(problem.title)+'<small>令和3年度 春期・記述式</small></div>';
+    html += '<div class="top-spacer"></div>';
+    html += '<button class="ghost small" id="btnMemo">メモ</button>';
+    html += '<button class="ghost small" id="btnReview">見直し一覧</button>';
+    html += '<button class="small" id="btnFinishTop">解答一覧を見る</button>';
+    html += '</div>';
+
+    html += '<div class="work-area">';
+    html += '<div class="pane left" id="panePages"></div>';
+    html += '<div class="pane right"><div class="pane-head"><b>解答欄</b><span>'+problem.label+' '+escapeHtml(problem.title)+'</span></div><div class="answer-scroll" id="paneAnswers"></div></div>';
+    html += '</div>';
+
+    html += '<div class="bottom-bar">';
+    html += '<span class="stat">この問題の解答状況：<b id="bottomDone">'+pr.done+' / '+pr.total+'</b></span>';
+    html += '<div class="legend"><span class="lg-done"><i></i>解答済み</span><span class="lg-mark"><i></i>見直しマーク</span><span class="lg-open"><i></i>未解答</span></div>';
+    html += '</div>';
+
+    html += '<div class="memo-panel'+(memoOpen?' open':'')+'" id="memoPanel">';
+    html += '<div class="memo-head"><b>メモ（'+problem.label+'）</b><button class="ghost small" id="memoClose">閉じる</button></div>';
+    html += '<textarea id="memoText" placeholder="計算メモや下書きを自由に書けます（採点対象外）">'+escapeHtml(state.memos[problem.id]||'')+'</textarea>';
+    html += '</div>';
+
+    root.innerHTML = html;
+
+    renderPagePane(problem, document.getElementById('panePages'));
+    var ansHost = document.getElementById('paneAnswers');
+    ansHost.innerHTML = renderAnswerPane(problem);
+    bindAnswerPane(ansHost, problem);
+
+    if(resumeScroll){
+      resumeScroll=false;
+      var firstOpen = allItems(problem).filter(function(it){ return !isAnswered(it); })[0];
+      if(firstOpen){
+        var target=document.getElementById('card-'+firstOpen.id);
+        if(target) target.scrollIntoView({block:'start'});
+        toast('前回の続きから表示しています');
+      }
+    }
+
+    document.getElementById('btnHome').addEventListener('click', function(){
+      state.screen='cover'; render();
+    });
+    document.getElementById('btnReview').addEventListener('click', function(){
+      state.screen='review'; render();
+    });
+    document.getElementById('btnFinishTop').addEventListener('click', function(){
+      state.screen='review'; render();
+    });
+    var memoPanel = document.getElementById('memoPanel');
+    var memoBtn = document.getElementById('btnMemo');
+    function setMemoOpen(open){
+      memoOpen = open;
+      memoPanel.classList.toggle('open', open);
+    }
+    memoBtn.addEventListener('click', function(){ setMemoOpen(!memoOpen); });
+    document.getElementById('memoClose').addEventListener('click', function(){ setMemoOpen(false); });
+    document.getElementById('memoText').addEventListener('input', function(e){
+      state.memos[problem.id] = e.target.value;
+      save();
+    });
+  }
+
+  /* ============================= RENDER: REVIEW ============================= */
+  function renderReview(){
+    var root=document.getElementById('app');
+    var problem=findProblem(state.current);
+    var pr=progressOf(problem);
+    var html='';
+    html+='<div class="top-bar"><div class="title">見直し一覧<small>'+problem.label+' '+escapeHtml(problem.title)+'</small></div></div>';
+    html+='<div class="review-wrap"><div class="review-inner">';
+    html+='<h1>解答状況の見直し</h1><p>設問をクリックすると、その設問に戻って解答を修正できます。</p>';
+
+    html+='<div class="rv-problem"><h2>'+problem.label+' '+escapeHtml(problem.title)+' <span class="cnt">('+pr.done+' / '+pr.total+' 解答済み)</span></h2>';
+    html+='<div class="rv-list">';
+    problem.groups.forEach(function(g){
+      g.items.forEach(function(it){
+        var done = isAnswered(it);
+        var marked = !!state.marked[it.id];
+        html+='<button class="rv-chip'+(done?' done':'')+(marked?' marked':'')+'" data-card="'+it.id+'">';
+        html+='<span class="status-dot"></span><span>'+escapeHtml(g.mon)+(it.sub?' '+it.sub:'')+'</span>';
+        if(marked) html+='<span class="mk">見直し</span>';
+        html+='</button>';
+      });
+    });
+    html+='</div></div>';
+
+    html+='<div class="finish-cta">';
+    html+='<button class="ghost" id="btnBackExam">演習に戻る</button>';
+    html+='<button class="primary" id="btnFinish">解答一覧を見る</button>';
+    html+='</div>';
+    html+='</div></div>';
+    root.innerHTML=html;
+
+    root.querySelectorAll('[data-card]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        state.screen='exam';
+        save();
+        render();
+        requestAnimationFrame(function(){
+          var el=document.getElementById('card-'+btn.getAttribute('data-card'));
+          if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+        });
+      });
+    });
+    document.getElementById('btnBackExam').addEventListener('click', function(){ state.screen='exam'; render(); });
+    document.getElementById('btnFinish').addEventListener('click', function(){
+      pushHistory(problem);
+      state.screen='result';
+      save();
+      render();
+    });
+  }
+
+  /* ============================= RENDER: RESULT ============================= */
+  function buildTranscript(problem, answersSrc){
+    answersSrc = answersSrc || state.answers;
+    var lines=[];
+    lines.push('令和3年度 春期 ネットワークスペシャリスト試験 午後I － 解答控え');
+    lines.push('■ '+problem.label+' '+problem.title);
+    lines.push('');
+    problem.groups.forEach(function(g){
+      lines.push('['+g.mon+']');
+      g.items.forEach(function(it){
+        var label = (it.sub? (g.mon+it.sub):g.mon);
+        if(it.type==="text"){
+          lines.push('  '+label+'： '+(answersSrc[it.id]||'（未解答）'));
+        } else if(it.type==="multi"){
+          var v=answersSrc[it.id]||[];
+          lines.push('  '+label+'： '+(v.length?v.join('、'):'（未解答）'));
+        } else if(it.type==="fields"){
+          var fv=answersSrc[it.id]||{};
+          it.fields.forEach(function(f){
+            var val = fv[f.key];
+            var text = Array.isArray(val)? (val.length?val.join('、'):'（未解答）') : (val||'（未解答）');
+            lines.push('  '+label+' '+f.label+'： '+text);
+          });
+        }
+        if(state.correct[it.id]){
+          lines.push('  '+label+' 正しい解答： '+state.correct[it.id]);
+        }
+      });
+    });
+    return lines.join('\n');
+  }
+
+  function buildQABlockHtml(problem, answersSrc, opts){
+    opts = opts || {};
+    var html='';
+    problem.groups.forEach(function(g){
+      g.items.forEach(function(it){
+        html+='<div class="rq"><span class="sub">'+escapeHtml(g.mon)+(it.sub?' '+it.sub:'')+'</span>';
+        html+='<div class="prompt">'+escapeHtml(it.prompt)+'</div>';
+        html+='<div class="ans-label">あなたの解答</div>';
+        if(it.type==="text"){
+          var v=answersSrc[it.id];
+          html+='<div class="ans'+(v?'':' empty')+'">'+escapeHtml(v||'（未解答）')+'</div>';
+        } else if(it.type==="multi"){
+          var vv=answersSrc[it.id]||[];
+          html+='<div class="ans'+(vv.length?'':' empty')+'">'+(vv.length?escapeHtml(vv.join('、')):'（未解答）')+'</div>';
+        } else if(it.type==="fields"){
+          var fv=answersSrc[it.id]||{};
+          it.fields.forEach(function(f){
+            var val=fv[f.key];
+            var text = Array.isArray(val)? (val.length?val.join('、'):'') : (val||'');
+            html+='<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">'+escapeHtml(f.label)+'</div>';
+            html+='<div class="ans'+(text?'':' empty')+'">'+escapeHtml(text||'（未解答）')+'</div>';
+          });
+        }
+        if(opts.showCorrect){
+          var corr = state.correct[it.id]||'';
+          html+='<div class="ans-label corr-label">正しい解答（自己採点用・任意入力）</div>';
+          if(opts.editableCorrect){
+            html+='<textarea class="corr-input" data-correct="'+it.id+'" rows="2" placeholder="IPA公式サイトの解答例を入力すると、あなたの解答と並べて記録できます">'+escapeHtml(corr)+'</textarea>';
+          } else {
+            html+='<div class="ans corr-display'+(corr?'':' empty')+'">'+escapeHtml(corr||'（未入力）')+'</div>';
+          }
+        }
+        html+='</div>';
+      });
+    });
+    return html;
+  }
+
+  function wireCopyButton(btnId, textareaEl, textFn){
+    document.getElementById(btnId).addEventListener('click', function(){
+      var text = textFn();
+      function fallbackCopy(){
+        textareaEl.focus();
+        textareaEl.select();
+        var ok=false;
+        try{ ok=document.execCommand('copy'); }catch(e){ ok=false; }
+        toast(ok?'コピーしました（テキスト欄からコピーしました）':'自動コピーできませんでした。テキスト欄から手動でコピーしてください。');
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ toast('コピーしました'); }, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  }
+
+  function renderResult(){
+    var root=document.getElementById('app');
+    var problem=findProblem(state.current);
+    var history = state.history[problem.id] || [];
+    var html='';
+    html+='<div class="top-bar"><div class="title">解答一覧<small>'+problem.label+' '+escapeHtml(problem.title)+'</small></div></div>';
+    html+='<div class="result-wrap"><div class="result-inner">';
+    html+='<h1>お疲れさまでした</h1>';
+    html+='<div class="result-note">このツールに自動採点機能はありません。以下はあなたが入力した解答の控えです。IPA公式サイト（ipa.go.jp）で公開されている「令和3年度春期 ネットワークスペシャリスト試験 午後I 解答例」を見ながら、各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。</div>';
+
+    html+='<h2 style="font-size:16px;">'+problem.label+' '+escapeHtml(problem.title)+'（今回の解答）</h2>';
+    html+=buildQABlockHtml(problem, state.answers, {showCorrect:true, editableCorrect:true});
+
+    html+='<div class="result-actions">';
+    html+='<button class="primary" id="btnCopy">解答をテキストでコピー</button>';
+    html+='<button class="ghost" id="btnBackHome">他の問題を解く</button>';
+    html+='<button class="ghost" id="btnRedo">この問題をやり直す（解答を消去）</button>';
+    html+='</div>';
+    html+='<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">コピーできない場合は、下の欄を選択して手動でコピーしてください。</div>';
+    html+='<textarea id="transcriptArea" readonly style="min-height:160px;" onclick="this.select()"></textarea>';
+
+    html+='<h2 style="font-size:16px;margin-top:32px;">過去の解答履歴</h2>';
+    if(!history.length){
+      html+='<p style="font-size:13px;color:var(--text-muted);">まだ履歴はありません。「解答一覧を見る」を押すと、そのときの解答が履歴として残ります。</p>';
+    } else {
+      html+='<p style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">この問題で過去に「解答一覧を見る」を押した時点の解答です。新しいものから表示しています。</p>';
+      history.forEach(function(entry, idx){
+        html+='<details class="hist-entry"><summary>'+fmtDateTime(entry.ts)+' の解答</summary>';
+        html+='<div class="hist-body">';
+        html+=buildQABlockHtml(problem, entry.answers, {showCorrect:true, editableCorrect:false});
+        html+='<div class="result-actions">';
+        html+='<button class="ghost small" id="histCopy'+idx+'">この履歴をコピー</button>';
+        html+='<button class="ghost small" id="histDelete'+idx+'">この履歴を削除</button>';
+        html+='</div>';
+        html+='<textarea class="hist-transcript" id="histTranscript'+idx+'" readonly onclick="this.select()"></textarea>';
+        html+='</div></details>';
+      });
+    }
+
+    html+='</div></div>';
+    root.innerHTML=html;
+
+    root.querySelectorAll('[data-correct]').forEach(function(el){
+      el.addEventListener('input', function(){
+        state.correct[el.getAttribute('data-correct')] = el.value;
+        save();
+        transcriptEl.value = buildTranscript(problem, state.answers);
+      });
+    });
+
+    var transcriptEl = document.getElementById('transcriptArea');
+    transcriptEl.value = buildTranscript(problem, state.answers);
+    wireCopyButton('btnCopy', transcriptEl, function(){ return buildTranscript(problem, state.answers); });
+
+    history.forEach(function(entry, idx){
+      var ta = document.getElementById('histTranscript'+idx);
+      ta.value = buildTranscript(problem, entry.answers);
+      wireCopyButton('histCopy'+idx, ta, function(){ return buildTranscript(problem, entry.answers); });
+      document.getElementById('histDelete'+idx).addEventListener('click', function(e){
+        e.preventDefault();
+        if(!confirm(fmtDateTime(entry.ts)+' の履歴を削除します。よろしいですか？')) return;
+        var list = state.history[problem.id]||[];
+        list.splice(idx,1);
+        state.history[problem.id]=list;
+        save();
+        render();
+      });
+    });
+
+    document.getElementById('btnBackHome').addEventListener('click', function(){
+      state.screen='cover'; render();
+    });
+    document.getElementById('btnRedo').addEventListener('click', function(){
+      if(!confirm('この問題（'+problem.label+'）の解答とメモを全て消去してやり直します。解答の履歴は残ります。よろしいですか？')) return;
+      clearProblemData(problem.id);
+      state.screen='exam';
+      render();
+    });
+  }
+
+  /* ============================= ROOT RENDER ============================= */
+  function render(){
+    var root=document.getElementById('app');
+    if(state.screen==="cover"){ renderCover(root); }
+    else if(state.screen==="exam"){ renderExam(); }
+    else if(state.screen==="review"){ renderReview(); }
+    else if(state.screen==="result"){ renderResult(); }
+  }
+
+  render();
+})();
+</script>
