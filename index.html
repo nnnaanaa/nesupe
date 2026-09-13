@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <title>NW午後I CBT模試</title>
-<meta name="description" content="令和3年度 春期 ネットワークスペシャリスト試験 午後I をCBT形式で解く模擬試験">
+<meta name="description" content="ネットワークスペシャリスト試験 午後I の過去問（令和元年度秋期・令和3年度春期）をCBT形式で解く学習ツール">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
@@ -420,6 +420,7 @@
     {
       id:1, label:"問1", title:"ネットワーク運用管理の自動化",
       lede:"中古車販売業A社の在庫管理システム更改。RTによるL2 over IPトンネルとLLDPを用いた構成管理自動化がテーマ。",
+      folder:"r03h",
       pages:[2,3,4,5,6,7],
       groups:[
         { mon:"設問1", note:"〔現状の在庫管理システム〕について", items:[
@@ -464,6 +465,7 @@
     {
       id:2, label:"問2", title:"企業ネットワークの統合",
       lede:"商社D社によるグループ企業E社の吸収合併に伴うネットワーク統合。OSPFエリア設計と経路集約の扱いがテーマ。",
+      folder:"r03h",
       pages:[8,9,10,11,12,13],
       groups:[
         { mon:"設問1", note:"本文中の空欄に入れる適切な字句を答えよ。", items:[
@@ -504,6 +506,7 @@
     {
       id:3, label:"問3", title:"通信品質の確保",
       lede:"商社Y社のクラウド音声サービス導入。VoIPの帯域計算とレイヤ2/レイヤ3優先制御（PQ・WRR・DSCP）がテーマ。",
+      folder:"r03h",
       pages:[14,15,16,17,18],
       groups:[
         { mon:"設問1", note:"本文中の空欄に入れる適切な字句又は数値を答えよ。", items:[
@@ -541,7 +544,133 @@
             prompt:"本文中の下線④について、eLNパケットをDパケットと異なるキュー2に入れる目的を、35字以内で述べよ。"}
         ]}
       ]
+    },
+    {
+      id:4, label:"問1", title:"ネットワークの増強",
+      lede:"データセンタ事業者Z社のネットワーク増強。LAGの冗長化・負荷分散方式と、自社サービス提供状況の監視方法の見直しがテーマ。",
+      folder:"r01a",
+      pages:[3,4,5,6,7],
+      groups:[
+        { mon:"設問1", note:"〔Z社の現行ネットワーク構成と増強案〕について", items:[
+          {id:"n1-1-1", sub:"(1)a", type:"text", limit:0,
+            prompt:"「コアルータとISPとの間の冗長経路接続のためのルーティングプロトコルは、パスベクトル型ルーティングプロトコルである［ a ］が用いられている」の a に入る字句。"},
+          {id:"n1-1-2", sub:"(1)b", type:"text", limit:0,
+            prompt:"「OSPFエリアは一つであり、［ b ］エリアだけで構成されている」の b に入る字句。"},
+          {id:"n1-1-3", sub:"(1)c", type:"text", limit:0,
+            prompt:"「マスタが故障した際には、新しくマスタになったルータが［ c ］パケットをブロードキャストすることによってL2SWのMACアドレステーブルを更新する」の c に入る字句。"},
+          {id:"n1-1-4", sub:"(2)", type:"text", limit:0,
+            prompt:"L3SW1とL3SW2で行っているVRRPによる冗長化において、L3SW1やL3SW2が受信するアドバタイズメントパケットはどの回線を通るか。経由する回線を図1中のア～スの中から選び、全て答えよ。"},
+          {id:"n1-1-5", sub:"(3)", type:"text", limit:0,
+            prompt:"現行ネットワークにおいて、顧客に割り当てているVLANタグの付与が必須となる回線を図1中のア～スの中から選び、全て答えよ。"},
+          {id:"n1-1-6", sub:"(4)", type:"text", limit:50,
+            prompt:"本文中の下線①について、静的LAGではなくLACPを設定することによって何が可能となるか。50字以内で述べよ。"},
+          {id:"n1-1-7", sub:"(5)", type:"text", limit:25,
+            prompt:"本文中の下線②について、L3SW3とL2SW3との間のLAGでIFを自動閉塞しない場合、どのような問題点があるか。“パケット”の字句を用いて25字以内で述べよ。"},
+          {id:"n1-1-8", sub:"(6)", type:"text", limit:50,
+            prompt:"本文中の下線③について、前者の方式を選択したときにLAGの負荷分散が図1の場合うまくいかないのはなぜか。50字以内で述べよ。"}
+        ]},
+        { mon:"設問2", note:"〔自社サービス提供状況の把握〕について", items:[
+          {id:"n1-2-1", sub:"(1)d", type:"text", limit:0,
+            prompt:"「［ d ］プロトコルを利用したpingによって、各監視対象装置の管理IFのIPアドレスに対して死活監視を行う」の d に入る字句。"},
+          {id:"n1-2-2", sub:"(1)e", type:"text", limit:0,
+            prompt:"「SNMPによって、各監視対象装置からの状態変更通知である［ e ］を受信する」の e に入る字句。"},
+          {id:"n1-2-3", sub:"(1)f", type:"text", limit:0,
+            prompt:"「SNMPによって、各監視対象装置から5分ごとに管理情報ベースである［ f ］を取得する」の f に入る字句。"},
+          {id:"n1-2-4", sub:"(2)", type:"text", limit:0,
+            prompt:"L2SW3とL2SW4との間のLAGを構成する各回線のトラフィック量を把握するために必要な監視方法を、本文中の(i)～(iii)から選び、そのローマ数字を答えよ。"},
+          {id:"n1-2-5", sub:"(3)", type:"text", limit:0,
+            prompt:"本文中の下線④について、追加する監視方法では、自社サービスのどこからどこまでの区間の正常性を確認できるようになるか。該当する区間を、本文中の字句を用いて答えよ。"}
+        ]}
+      ]
+    },
+    {
+      id:5, label:"問2", title:"Webシステムの構成変更",
+      lede:"菓子メーカーA社のオンラインショップへのWAFサービス（SaaS）導入と、ロードバランサ（LB）導入の検討がテーマ。",
+      folder:"r01a",
+      pages:[8,9,10,11,12],
+      groups:[
+        { mon:"設問1", note:"", items:[
+          {id:"n2-1-1", sub:"", type:"text", limit:45,
+            prompt:"本文中の下線①について、A社にとっての利点を45字以内で述べよ。"}
+        ]},
+        { mon:"設問2", note:"〔LBに関する検討〕について", items:[
+          {id:"n2-2-1", sub:"(1)ア", type:"text", limit:0,
+            prompt:"「HTTPリクエストをWebサーバに［ ア ］に振り分けるラウンドロビン方式を採用することにした」の ア に入る字句。"},
+          {id:"n2-2-2", sub:"(1)イ", type:"text", limit:0,
+            prompt:"表1中「HTTPリクエスト」の「ポート番号」［ イ ］に入る適切な数値。"},
+          {id:"n2-2-3", sub:"(1)ウ", type:"text", limit:0,
+            prompt:"表1中「成功時のHTTPレスポンス」の「ステータスコード」［ ウ ］に入る適切な数値。"},
+          {id:"n2-2-4", sub:"(1)エ", type:"text", limit:0,
+            prompt:"「LBは、HTTPレスポンスの［ エ ］ヘッダフィールドにセッションIDを追加する」の エ に入る字句。"},
+          {id:"n2-2-5", sub:"(1)オ", type:"text", limit:0,
+            prompt:"「次に送信するHTTPリクエストの［ オ ］ヘッダフィールドに追加する」の オ に入る字句。"},
+          {id:"n2-2-6", sub:"(2)", type:"text", limit:10,
+            prompt:"本文中の下線②について、送信元IPアドレスに基づいて行う方式を採用した場合に発生するおそれがある問題を、10字以内で述べよ。"},
+          {id:"n2-2-7", sub:"(3)", type:"text", limit:20,
+            prompt:"本文中の下線③の処理の内容を、20字以内で答えよ。"}
+        ]},
+        { mon:"設問3", note:"〔WAFサービス停止時の対応検討〕について", items:[
+          {id:"n2-3-1", sub:"(1)", type:"fields", limit:0,
+            prompt:"本文中の［ カ ］に入れる機器を、図3中のDNSサーバ以外の機器名で答えよ。また、本文中の下線④の変更内容を35字以内で述べよ。",
+            fields:[{key:"device",label:"カ：機器名"},{key:"desc",label:"下線④の変更内容（35字以内）",limit:35}]},
+          {id:"n2-3-2", sub:"(2)", type:"text", limit:0,
+            prompt:"本文中の下線⑤について、書換え後の資源レコードを答えよ。"},
+          {id:"n2-3-3", sub:"(3)", type:"text", limit:30,
+            prompt:"本文中の下線⑥の設定内容を、30字以内で答えよ。"}
+        ]}
+      ]
+    },
+    {
+      id:6, label:"問3", title:"LANのセキュリティ対策",
+      lede:"小売業E社における、ARPスプーフィングの手法を用いた通信制限装置導入と、不正PC・未登録PCの排除運用がテーマ。",
+      folder:"r01a",
+      pages:[13,14,15,16,17],
+      groups:[
+        { mon:"設問1", note:"", items:[
+          {id:"n3-1-1", sub:"", type:"fields", limit:0,
+            prompt:"本文中の下線①について、DHCPサーバとPCのセグメントが異なっている場合に必要となる、スイッチの機能名を答えよ。また、その機能が有効になっているスイッチを、図1中の機器名で、全て答えよ。ただし、その機能が有効になっているスイッチは、台数が最少となるように選択すること。",
+            fields:[{key:"func",label:"機能名"},{key:"sw",label:"対象スイッチ（全て）"}]}
+        ]},
+        { mon:"設問2", note:"〔LAN通信制限方法の検討〕について", items:[
+          {id:"n3-2-1", sub:"(1)", type:"text", limit:35,
+            prompt:"案1において、本文中の下線②を実施しない場合に生じる問題を、35字以内で述べよ。"},
+          {id:"n3-2-2", sub:"(2)", type:"text", limit:25,
+            prompt:"図1中のフロア1、フロア2のL2SWで、DHCPスヌーピングを有効にする際に、L3SWと接続するポートにだけ必要な設定を、25字以内で述べよ。"},
+          {id:"n3-2-3", sub:"(3)a", type:"multi", limit:0, selectCount:1,
+            prompt:"表1中の［ a ］（通信制限装置が送信するARP応答の送信元ハードウェアアドレス）に入れる適切な字句を解答群の中から選べ。",
+            options:[["ア","アドレス解決対象のIPアドレス"],["イ","アドレス解決対象のMACアドレス"],["ウ","通信制限装置のIPアドレス"],["エ","通信制限装置のMACアドレス"],["オ","排除対象PCのIPアドレス"],["カ","排除対象PCのMACアドレス"]]},
+          {id:"n3-2-4", sub:"(3)b", type:"multi", limit:0, selectCount:1,
+            prompt:"表1中の［ b ］（通信制限装置が送信するARP応答の送信元プロトコルアドレス）に入れる適切な字句を解答群の中から選べ。",
+            options:[["ア","アドレス解決対象のIPアドレス"],["イ","アドレス解決対象のMACアドレス"],["ウ","通信制限装置のIPアドレス"],["エ","通信制限装置のMACアドレス"],["オ","排除対象PCのIPアドレス"],["カ","排除対象PCのMACアドレス"]]},
+          {id:"n3-2-5", sub:"(3)c", type:"multi", limit:0, selectCount:1,
+            prompt:"表1中の［ c ］（通信制限装置が送信するARP要求の送信元ハードウェアアドレス）に入れる適切な字句を解答群の中から選べ。",
+            options:[["ア","アドレス解決対象のIPアドレス"],["イ","アドレス解決対象のMACアドレス"],["ウ","通信制限装置のIPアドレス"],["エ","通信制限装置のMACアドレス"],["オ","排除対象PCのIPアドレス"],["カ","排除対象PCのMACアドレス"]]},
+          {id:"n3-2-6", sub:"(3)d", type:"multi", limit:0, selectCount:1,
+            prompt:"表1中の［ d ］（通信制限装置が送信するARP要求の送信元プロトコルアドレス）に入れる適切な字句を解答群の中から選べ。",
+            options:[["ア","アドレス解決対象のIPアドレス"],["イ","アドレス解決対象のMACアドレス"],["ウ","通信制限装置のIPアドレス"],["エ","通信制限装置のMACアドレス"],["オ","排除対象PCのIPアドレス"],["カ","排除対象PCのMACアドレス"]]}
+        ]},
+        { mon:"設問3", note:"〔通信制限装置の導入〕について", items:[
+          {id:"n3-3-1", sub:"(1)", type:"text", limit:0,
+            prompt:"本文中の下線③の構成において、必要となる通信制限装置の最少台数を答えよ。ただし、サーバ室での不正PCや未登録PCの利用対策は、考慮しなくてよいものとする。"},
+          {id:"n3-3-2", sub:"(2)", type:"fields", limit:0,
+            prompt:"本文中の下線④について、導入する通信制限装置のうちの1台を対象として、そのLANポート1～4の接続先を、図1中の機器名でそれぞれ答えよ。ただし、LANポート1～4は番号の小さい順に使用し、使用しないポートには“空き”と記入すること。",
+            fields:[{key:"p1",label:"LANポート1"},{key:"p2",label:"LANポート2"},{key:"p3",label:"LANポート3"},{key:"p4",label:"LANポート4"}]}
+        ]},
+        { mon:"設問4", note:"〔運用の整備〕について", items:[
+          {id:"n3-4-1", sub:"(1)", type:"fields", limit:0,
+            prompt:"本文中の下線⑤について、対処用セグメントのPCの通信先として許可される他セグメントの機器を二つ挙げ、それぞれ図1中の機器名で答えよ。",
+            fields:[{key:"d1",label:"機器（1）"},{key:"d2",label:"機器（2）"}]},
+          {id:"n3-4-2", sub:"(2)", type:"fields", limit:0,
+            prompt:"対処用セグメントを追加する際に、L3SW1、L3SW2以外に設定変更が必要な機器を二つ挙げ、それぞれ図1中の機器名で答えよ。また、それぞれの機器の変更内容を30字以内で述べよ。",
+            fields:[{key:"d1",label:"機器（1）"},{key:"c1",label:"変更内容（1）（30字以内）",limit:30},{key:"d2",label:"機器（2）"},{key:"c2",label:"変更内容（2）（30字以内）",limit:30}]}
+        ]}
+      ]
     }
+  ];
+
+  var EXAM_GROUPS = [
+    {title:"令和3年度 春期", ids:[1,2,3]},
+    {title:"令和元年度 秋期", ids:[4,5,6]}
   ];
 
   var STORE_KEY = "nw-r03h-pm1-cbt-mock-v3";
@@ -611,6 +740,10 @@
   }
 
   function findProblem(id){ for(var i=0;i<PROBLEMS.length;i++){ if(PROBLEMS[i].id===id) return PROBLEMS[i]; } return null; }
+  function examLabelFor(problemId){
+    for(var i=0;i<EXAM_GROUPS.length;i++){ if(EXAM_GROUPS[i].ids.indexOf(problemId)>=0) return EXAM_GROUPS[i].title; }
+    return '';
+  }
   function allItems(problem){
     var out=[];
     problem.groups.forEach(function(g){ g.items.forEach(function(it){ out.push(it); }); });
@@ -651,37 +784,40 @@
     var html = '';
     html += '<div class="cover-wrap"><div class="cover">';
     html += '<div class="cover-band"><span class="tag">CBT方式 学習モード</span>';
-    html += '<h1>令和3年度 春期 ネットワークスペシャリスト試験</h1>';
-    html += '<p>午後I 問題（記述式） — CBT形式の画面で1問ずつ演習できる学習用ツール</p></div>';
+    html += '<h1>ネットワークスペシャリスト試験 午後I 過去問</h1>';
+    html += '<p>記述式の過去問題を、CBT形式の画面で1問ずつ演習できる学習用ツール</p></div>';
     html += '<div class="cover-body">';
     html += '<div class="cover-meta">';
-    html += '<div><div class="k">出題数</div><div class="v">問1〜問3</div></div>';
+    html += '<div><div class="k">出題年度</div><div class="v">'+EXAM_GROUPS.length+'年度分</div></div>';
     html += '<div><div class="k">解答方式</div><div class="v">記述式</div></div>';
     html += '<div><div class="k">採点</div><div class="v">自己採点</div></div>';
     html += '</div>';
 
     html += '<h2>注意事項</h2>';
     html += '<ul class="rules">';
-    html += '<li>本問題は<b>紙の過去問題（令和3年度春期 NW午後I）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
+    html += '<li>本問題は<b>紙の過去問題（ネットワークスペシャリスト試験 午後I）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
     html += '<li>下から<b>1問ずつ選んで</b>演習できます。途中で他の問題に切り替えても、それぞれの解答は個別に保存されます。</li>';
     html += '<li>解答は自動的にこの端末（ブラウザ）に保存されます。閉じても続きから再開できます。</li>';
     html += '<li>本ツールに採点機能はありません。学習後に表示される解答一覧を、IPA公式サイトで公開されている解答例と照らして自己採点してください。</li>';
     html += '</ul>';
 
-    html += '<h2>解く問題を選んでください</h2>';
-    html += '<div class="pick-grid">';
-    PROBLEMS.forEach(function(p){
-      var pr = progressOf(p);
-      var statusText = pr.done===0 ? '未着手' : (pr.done>=pr.total ? '解答済み' : pr.done+' / '+pr.total+' 解答済み');
-      var statusClass = pr.done===0 ? '' : (pr.done>=pr.total ? 'done' : 'partial');
-      html += '<button class="pick-card select" data-select="'+p.id+'">';
-      html += '<div class="num">'+p.label+'</div>';
-      html += '<div class="ttl">'+p.title+'</div>';
-      html += '<div class="desc">'+p.lede+'</div>';
-      html += '<div class="pick-status '+statusClass+'">'+statusText+'</div>';
-      html += '</button>';
+    EXAM_GROUPS.forEach(function(group){
+      html += '<h2>'+escapeHtml(group.title)+'</h2>';
+      html += '<div class="pick-grid">';
+      group.ids.forEach(function(pid){
+        var p = findProblem(pid);
+        var pr = progressOf(p);
+        var statusText = pr.done===0 ? '未着手' : (pr.done>=pr.total ? '解答済み' : pr.done+' / '+pr.total+' 解答済み');
+        var statusClass = pr.done===0 ? '' : (pr.done>=pr.total ? 'done' : 'partial');
+        html += '<button class="pick-card select" data-select="'+p.id+'">';
+        html += '<div class="num">'+p.label+'</div>';
+        html += '<div class="ttl">'+p.title+'</div>';
+        html += '<div class="desc">'+p.lede+'</div>';
+        html += '<div class="pick-status '+statusClass+'">'+statusText+'</div>';
+        html += '</button>';
+      });
+      html += '</div>';
     });
-    html += '</div>';
 
     html += '<div style="font-size:12.5px;color:var(--text-muted);margin-top:14px;">時間の計測はありません。自分のペースで解答できます。</div>';
 
@@ -907,7 +1043,7 @@
     html += '<div class="page-scroll" id="pageScroll" style="--zoom:'+zoomLevel+'%">';
     problem.pages.forEach(function(pg){
       var f = pg<10?('0'+pg):(''+pg);
-      html += '<div class="page-frame" data-page="'+pg+'"><img src="pages/'+f+'.png" alt="問題冊子 '+pg+'ページ" loading="lazy"></div>';
+      html += '<div class="page-frame" data-page="'+pg+'"><img src="pages/'+problem.folder+'/'+f+'.png" alt="問題冊子 '+pg+'ページ" loading="lazy"></div>';
       html += '<div class="page-num-tag">p.'+pg+'</div>';
     });
     html += '</div>';
@@ -941,7 +1077,7 @@
     var html='';
     html += '<div class="top-bar">';
     html += '<button class="ghost small" id="btnHome" title="問題選択に戻る">← 問題選択</button>';
-    html += '<div class="title">'+problem.label+' '+escapeHtml(problem.title)+'<small>令和3年度 春期・記述式</small></div>';
+    html += '<div class="title">'+problem.label+' '+escapeHtml(problem.title)+'<small>'+escapeHtml(examLabelFor(problem.id))+'・記述式</small></div>';
     html += '<div class="top-spacer"></div>';
     html += '<button class="ghost small" id="btnMemo">メモ</button>';
     html += '<button class="ghost small" id="btnReview">見直し一覧</button>';
@@ -1058,7 +1194,7 @@
   function buildTranscript(problem, answersSrc){
     answersSrc = answersSrc || state.answers;
     var lines=[];
-    lines.push('令和3年度 春期 ネットワークスペシャリスト試験 午後I － 解答控え');
+    lines.push(examLabelFor(problem.id)+' ネットワークスペシャリスト試験 午後I － 解答控え');
     lines.push('■ '+problem.label+' '+problem.title);
     lines.push('');
     problem.groups.forEach(function(g){
@@ -1150,7 +1286,7 @@
     html+='<div class="top-bar"><div class="title">解答一覧<small>'+problem.label+' '+escapeHtml(problem.title)+'</small></div></div>';
     html+='<div class="result-wrap"><div class="result-inner">';
     html+='<h1>お疲れさまでした</h1>';
-    html+='<div class="result-note">このツールに自動採点機能はありません。以下はあなたが入力した解答の控えです。IPA公式サイト（ipa.go.jp）で公開されている「令和3年度春期 ネットワークスペシャリスト試験 午後I 解答例」を見ながら、各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。</div>';
+    html+='<div class="result-note">このツールに自動採点機能はありません。以下はあなたが入力した解答の控えです。IPA公式サイト（ipa.go.jp）で公開されている「'+escapeHtml(examLabelFor(problem.id))+' ネットワークスペシャリスト試験 午後I 解答例」を見ながら、各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。</div>';
 
     html+='<h2 style="font-size:16px;">'+problem.label+' '+escapeHtml(problem.title)+'（今回の解答）</h2>';
     html+=buildQABlockHtml(problem, state.answers, {showCorrect:true, editableCorrect:true});
