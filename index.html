@@ -463,6 +463,15 @@
   .rq .corr-input:focus{ outline-color:var(--good); border-color:var(--good); }
   .rq .ans.corr-display{ background:var(--good-soft); }
   .result-actions{ display:flex; gap:12px; margin:26px 0 10px; flex-wrap:wrap; }
+  .model-bar{ margin:0 0 18px; padding:12px 14px; border:1px solid var(--border-strong); border-radius:10px; background:var(--surface); }
+  .model-bar-btns{ display:flex; gap:10px; flex-wrap:wrap; }
+  .model-bar p{ margin:8px 0 0; font-size:12.5px; color:var(--text-muted); }
+  .model-bar p.model-note{ color:var(--text); }
+  .rq .model-ans{ display:none; margin-top:10px; padding-top:8px; border-top:1px dashed var(--border-strong); }
+  .model-on .rq .model-ans{ display:block; }
+  .rq .model-label{ color:var(--accent-strong); margin-top:6px; }
+  .rq .ans.model-text{ background:var(--accent-soft); font-weight:600; }
+  .rq .model-exp{ font-size:13px; line-height:1.85; padding:4px 2px; white-space:pre-wrap; }
   .hist-entry{
     border:1px solid var(--border); border-radius:10px; background:var(--surface);
     margin-bottom:10px; overflow:hidden;
@@ -855,7 +864,9 @@
           {id:"h3-1-1", sub:"ア", type:"text", limit:0, prompt:"「PC及びサーバからインターネットへのWeb閲覧などの通信は、FWでIPアドレスとポート番号の変換処理である［ ア ］を行う」の ア に入る字句。"},
           {id:"h3-1-2", sub:"イ", type:"text", limit:0, prompt:"「フェーズ1では、接続する相手を認証する方式として、両方の機器であらかじめ、［ イ ］と呼ばれる同じ鍵を共有する方式を利用する」の イ に入る字句。"},
           {id:"h3-1-3", sub:"ウ", type:"text", limit:0, prompt:"「特定のルーティングポリシで管理されたルータの集まりを示す［ ウ ］の間で、経路情報の交換を行うために開発されたプロトコルである」の ウ に入る字句。"},
-          {id:"h3-1-4", sub:"エ", type:"text", limit:0, prompt:"「BGP接続を行う2台のルータ間ではトランスポートプロトコルの一つである［ エ ］のポート179番を使用し」の エ に入る字句。"}
+          {id:"h3-1-4", sub:"エ", type:"text", limit:0, prompt:"「BGP接続を行う2台のルータ間ではトランスポートプロトコルの一つである［ エ ］のポート179番を使用し」の エ に入る字句。"},
+          {id:"h3-1-5", sub:"オ", type:"text", limit:0, prompt:"「監視にはpingを用いる。pingは、［ オ ］のecho requestパケットを監視対象に送り」の オ に入る字句。"},
+          {id:"h3-1-6", sub:"カ", type:"text", limit:0, prompt:"「［ カ ］パケットが監視対象から返ってくることで到達性を確認する」の カ に入る字句。"}
         ]},
         { mon:"設問2", note:"〔インターネットVPN接続の検討〕について", items:[
           {id:"h3-2-1", sub:"(1)", type:"text", limit:30,
@@ -997,6 +1008,9 @@
     {title:"平成30年度 秋期", ids:[10,11,12]},
     {title:"平成29年度 秋期", ids:[7,8,9]}
   ];
+  var MODEL_DATA = {"h1-1-1": {"a": "SHA-1", "e": "MD5と並んで、衝突（同じハッシュ値になる別データ）が見つかり安全性が不十分とされるハッシュアルゴリズムです。TLS 1.2以上ではSHA-256以上を使えるため、これらを使わずに済みます。"}, "h1-1-2": {"a": "1.2", "e": "TLS 1.2からは、ハンドシェイクや鍵導出でMD5・SHA-1の組合せに頼らず、SHA-256などのハッシュを使えます。そのため「MD5又はSHA-1を使わないで済む最低限のバージョン」は1.2です。"}, "h1-1-3": {"a": "Client_Hello", "e": "SSL/TLSのハンドシェイクは、クライアントがClient_Helloで「使えるバージョンと暗号スイートの一覧」を送るところから始まります。"}, "h1-1-4": {"a": "Server_Hello", "e": "サーバがServer_Helloで、クライアントの候補の中から使用するバージョンと暗号スイートを選んで返します。これで以降に使う暗号スイートが決まります。"}, "h1-1-5": {"a": "リバースプロキシ", "e": "SSL-VPNの動作方式は、リバースプロキシ方式（Webアプリ中心）、ポートフォワーディング方式（指定ポートのTCP通信）、L2フォワーディング方式（レイヤ2の中継）の3つです。"}, "h1-2-1": {"a": "暗号アルゴリズム：①鍵交換 ②認証\nハッシュアルゴリズム：メッセージ認証", "e": "暗号スイートは「鍵交換」「認証（署名）」「アプリケーション層の暗号化」「ハッシュ（メッセージ認証）」の組合せです。設問の「2種類の暗号アルゴリズム」は、アプリ層の暗号化以外の鍵交換と認証にあたり、ハッシュはメッセージ認証（改ざん検出）に使われます。"}, "h1-2-2": {"a": "顧客システムは、様々なプロトコルを利用している。", "e": "リバースプロキシ方式やポートフォワーディング方式は、対応するアプリ・ポートが限られます。H社の顧客システムは利用プロトコルが様々なので、プロトコルを問わず通せるL2フォワーディング方式が適します。"}, "h1-2-3": {"a": "vNIC", "e": "L2フォワーディング方式では、PCに仮想NIC（vNIC）が作られ、SSL/TLSトンネル上でレイヤ2の中継を行います。認証に応じて割り当てられたIPアドレスは、この仮想NICに設定されます（物理NICは元のネットワーク用のまま）。"}, "h1-3-1": {"a": "内部LAN", "e": "表1の1行目は、内部LANからDMZ（プロキシサーバ経由でインターネットへ向かう通信）のルールです。"}, "h1-3-2": {"a": "DMZ", "e": "内部LAN→DMZのルールです。内部LANのWebアクセスはDMZのプロキシサーバを経由します。"}, "h1-3-3": {"a": "172.16.0.0/16", "e": "送信元は内部LAN全体（172.16.0.0/16）です。"}, "h1-3-4": {"a": "202.y.44.2/32", "e": "インターネットからDMZへ許可するTCP/443は、SSL-VPN装置（202.y.44.2）宛のみです。DMZ内のほかの機器には通さないよう、宛先を1ホスト（/32）に絞ります。"}, "h1-4-1": {"a": "②，③，④，⑤", "e": "表2は「172.16.0.0/16宛を禁止、それ以外は許可」です。開発LAN（VLAN101＝⑤）から顧客システム構築ネットワークへの直接アクセスと、顧客システム構築ネットワーク同士（VLAN1〜3＝②③④）の通信を、それぞれの入力方向で止めるため、②③④⑤に設定します。"}, "h1-4-2": {"a": "顧客システム構築ネットワークから他社の顧客システム構築ネットワークへの通信", "e": "表2を②③④（顧客システム構築ネットワーク側）の入力方向に設定すると、「それ以外の不正な通信」として、ある顧客のネットワークから他社の顧客のネットワークへの通信が禁止されます。"}, "h1-4-3": {"a": "⑥", "e": "VPN-PCはSSL-VPN装置の内側（VLAN201）経由で入ってきます。この入口にあたる⑥の入力方向に表3を設定し、自社に対応する顧客システム構築ネットワーク以外へのアクセスを禁止します。"}, "h2-1-1": {"a": "バーストトラフィック", "e": "一時的に大量の帯域を使う、瞬間的に集中する通信のことです。プリントデータの送信がこれにあたります。"}, "h2-2-1": {"a": "導入前：ファイル転送通信\n導入後：画面転送通信、プリント通信", "e": "VDI導入後は、ファイル転送はVDIサーバとファイルサーバの間（本社内）で完結し、インターネット通信も本社の仮想PCから出るため、広域イーサ網を通らなくなります。支店のTCと本社のVDIサーバの間では画面転送通信が流れ、プリント通信は本社の仮想PCから支店のプリントサーバへ流れます。"}, "h2-2-2": {"a": "1.25", "e": "現行の安全率＝契約帯域÷ピーク時の必要帯域です。支店は100M÷（800M÷10支店＝80M）＝1.25、本社は1G÷800M＝1.25で、どちらも1.25です。"}, "h2-2-3": {"a": "100", "e": "VDI導入後に広域イーサ網を通る必要帯域は、画面転送通信のみです。支店は40人×200kビット/秒＝8Mなので、全10支店で80Mです。安全率1.25を掛けて80M×1.25＝100M。"}, "h2-2-4": {"a": "10", "e": "各支店は40人×200kビット/秒＝8Mビット/秒。安全率1.25を掛けて8M×1.25＝10Mビット/秒です。"}, "h2-2-5": {"a": "理由：インターネット通信は本社の仮想PCから行われるから。\n利点：情報セキュリティ対策を本社で集中的に行うことができる。", "e": "仮想PCは本社のVDIサーバ上にあり、インターネットへの通信は本社の仮想PCから出ます。そのため支店のインターネット回線は不要です。出口が本社の1か所になり、UTMなどの対策を集中して行えます（設問が「利点」を問うているので、利点も必ず書きます）。"}, "h2-3-1": {"a": "プリント通信が画面転送通信を圧迫するから。", "e": "プリント通信は帯域を確保しない（量も把握できない）ため、一時的に大量の帯域を使い、同じ広域イーサ網を通る画面転送通信の帯域を奪います。その結果TCの画面更新が遅れ、操作性が悪化します。"}, "h2-3-2": {"a": "送出タイミングを調整する。", "e": "シェーピングは、超過分を破棄せずバッファに溜めて送出タイミングを遅らせ、契約帯域に収める制御です。「パケットを破棄する」はポリシングの動作なので誤りです（採点講評でも誤答が多かった点として挙げられています）。"}, "h2-4-1": {"a": "仮想SW", "e": "仮想PCは仮想SWとの接続で外部と通信するので、隔離するには仮想SWから切り離します（物理的にLANケーブルを抜くことの代わり）。"}, "h2-4-2": {"a": "任意", "e": "感染した仮想PCだけでなく、他の仮想PCも含めてC&Cサーバへの通信を防ぐので、送信元は特定せず「任意」とします。"}, "h2-4-3": {"a": "C&Cサーバ", "e": "標的型攻撃対策装置が特定したC&CサーバのIPアドレスを宛先に指定し、インターネット方向の通信を拒否します。"}, "h3-1-1": {"a": "NAPT", "e": "プライベートIPアドレスの端末がインターネットに出るとき、IPアドレスとポート番号を同時に変換する仕組みです（IPマスカレード）。"}, "h3-1-2": {"a": "事前共有鍵", "e": "IKEフェーズ1の認証方式の一つで、両方の機器にあらかじめ同じ鍵（PSK）を設定します。"}, "h3-1-3": {"a": "AS", "e": "同じルーティングポリシで管理されるルータの集まりが自律システム（AS）で、BGPはAS間で経路交換を行うプロトコルです。AS番号が割り当てられます。"}, "h3-1-4": {"a": "TCP", "e": "BGPはTCPのポート179番を使い、BGPピアのコネクションを確立して経路情報を交換します。"}, "h3-1-5": {"a": "ICMP", "e": "pingはICMPのecho requestを送り、echo replyが返ることで到達性を確認します（RFC 792）。"}, "h3-1-6": {"a": "echo reply", "e": "監視対象が返すICMPのパケットはecho replyです。"}, "h3-2-1": {"a": "暗号化対象の通信がグローバルIPアドレス間の通信だから。", "e": "トランスポートモードは元のIPヘッダを残したままペイロードを暗号化します。今回はIP in IPで外側にVPNルータ間のグローバルIPアドレスのヘッダが付いており、IPsecで暗号化する通信そのものがグローバルIPアドレス間の通信です。新たにIPヘッダを付けるトンネルモードは不要になります。"}, "h3-2-2": {"a": "フラグメントとリアセンブルの処理が発生する。", "e": "IP in IPで外側のIPヘッダが加わり、さらにIPsecで暗号化すると、1,500バイトのMTUを超えます。そのためVPNルータでIPパケットの分割（フラグメント）と再構成（リアセンブル）が必要になり、処理負荷と遅延が増えます。"}, "h3-3-1": {"a": "BGPによって回線断や機器障害を検知し、トラフィックをう回できる。", "e": "静的経路では、障害が起きても経路が自動で切り替わりません。BGPでは、ピアの断絶を検知して経路を取り消し、別の経路（スタンバイ側）へ自動的に迂回できます。"}, "h3-3-2": {"a": "Helloパケットを出さない。", "e": "OSPFのパッシブインタフェースは、Helloパケットを送らず、隣接関係（ネイバー）を作りません。ただし、そのインタフェースのネットワークは経路として広告できます。トンネルインタフェースは経路交換が不要なので、パッシブにします。"}, "h3-3-3": {"a": "大きく", "e": "OSPFではコストが小さい経路が優先されます。VPNb1側をスタンバイにするには、VPNa1側よりコストを大きくします。"}, "h3-3-4": {"a": "eBGPからOSPFへ再配布された経路を、再びeBGPへ再配布しない。", "e": "OSPFとBGPの間で相互に再配布すると、経路情報がぐるぐる回るループが生じ得ます。BGPで受けてOSPFに再配布した経路を、再びBGPへ戻さないよう制御します。IPの経路制御でもループは起こり得ます（STPはレイヤ2のループ対策なので誤りです）。"}, "h3-4-1": {"a": "ネットワーク接続の冗長構成が失われたことを検出するため。", "e": "VPNトンネルは常用側とスタンバイ側の2本あります。片方のトンネルが切れても通信は続きますが、冗長が失われた状態を放置すると次の障害で全断になります。そのため両方を常に監視し、冗長構成の喪失を検知します。"}};
+  var PROBLEM_NOTES = {"7": "IPA採点講評（要旨）：全体として正答率は低め。設問1（TLSのバージョン・プロトコル選定）、設問2(1)（暗号スイート中のアルゴリズムの用途）、設問2(2)（動作方式の選定根拠）は特に低かった一方、設問3・設問4は高かった。設問4は、L3SWに隣接するFWの設定を考慮しない誤答も見られた。", "8": "IPA採点講評（要旨）：全体として正答率は高め。設問2(2)の広域イーサ網の計算は低かった。設問2(3)は利点への言及がない解答が散見された。設問3(2)は「パケットを破棄する」と誤答した受験者が多く、シェーピングとポリシングの違いの理解が課題。", "9": "IPA採点講評（要旨）：設問2(1)（トランスポートモードを選んだ根拠）と設問4（二つのVPNトンネルを監視する目的）は正答率が低かった。設問3(4)は、経路ループの防止策としてSTPと誤答する例が散見された。"};
+
 
   var STORE_KEY = "nw-r03h-pm1-cbt-mock-v3";
 
@@ -1028,6 +1042,7 @@
   var resumeScroll = false;
   var markerTool = null, markerSize = 3, invertOn = false, statusOpen = false, calcOpen = false, memoTrans = false;
   var activeItemId = null, splitH = 54, splitV = 50;
+  var modelShown = false;
   var HISTORY_LIMIT = 20;
 
   function save(){
@@ -1934,6 +1949,12 @@
             html+='<div class="ans corr-display'+(corr?'':' empty')+'">'+escapeHtml(corr||'（未入力）')+'</div>';
           }
         }
+        if(opts.showModel && MODEL_DATA[it.id]){
+          var mo = MODEL_DATA[it.id];
+          html+='<div class="model-ans"><div class="ans-label model-label">模範解答（IPA公式解答例）</div><div class="ans model-text">'+escapeHtml(mo.a)+'</div>';
+          if(mo.e) html+='<div class="ans-label model-label">解説</div><div class="model-exp">'+escapeHtml(mo.e)+'</div>';
+          html+='</div>';
+        }
         html+='</div>';
       });
     });
@@ -1968,8 +1989,15 @@
     html+='<h1>お疲れさまでした</h1>';
     html+='<div class="result-note">このツールに自動採点機能はありません。以下はあなたが入力した解答の控えです。IPA公式サイト（ipa.go.jp）で公開されている「'+escapeHtml(examLabelFor(problem.id))+' ネットワークスペシャリスト試験 午後I 解答例」を見ながら、各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。</div>';
 
+    var hasModel = allItems(problem).some(function(it){ return MODEL_DATA[it.id]; });
+    if(hasModel){
+      html+='<div class="model-bar"><div class="model-bar-btns"><button class="primary" id="btnModelToggle">'+(modelShown?'模範解答と解説を隠す':'模範解答と解説を表示')+'</button><button class="ghost" id="btnModelCopy">模範解答を「正しい解答」欄に転記</button></div>';
+      html+='<p>模範解答はIPA公式の解答例です。解説は当ツールの作成者が書いたもので、IPA公式のものではありません。</p>';
+      if(PROBLEM_NOTES[problem.id]) html+='<p class="model-note">'+escapeHtml(PROBLEM_NOTES[problem.id])+'</p>';
+      html+='</div>';
+    }
     html+='<h2 style="font-size:16px;">'+problem.label+' '+escapeHtml(problem.title)+'（今回の解答）</h2>';
-    html+=buildQABlockHtml(problem, state.answers, {showCorrect:true, editableCorrect:true});
+    html+='<div id="qaBlock" class="'+(modelShown?'model-on':'')+'">'+buildQABlockHtml(problem, state.answers, {showCorrect:true, editableCorrect:true, showModel:true})+'</div>';
 
     html+='<div class="result-actions">';
     html+='<button class="primary" id="btnCopy">解答をテキストでコピー</button>';
@@ -2028,6 +2056,22 @@
       });
     });
 
+    if(hasModel){
+      document.getElementById('btnModelToggle').addEventListener('click', function(){
+        modelShown = !modelShown;
+        document.getElementById('qaBlock').classList.toggle('model-on', modelShown);
+        this.textContent = modelShown ? '模範解答と解説を隠す' : '模範解答と解説を表示';
+      });
+      document.getElementById('btnModelCopy').addEventListener('click', function(){
+        var n = 0;
+        allItems(problem).forEach(function(it){
+          if(MODEL_DATA[it.id] && !state.correct[it.id]){ state.correct[it.id] = MODEL_DATA[it.id].a; n++; }
+        });
+        save();
+        toast(n ? n+'件を「正しい解答」欄に転記しました' : '転記できる未入力の欄はありません');
+        render();
+      });
+    }
     document.getElementById('btnPrint').addEventListener('click', function(){
       state.screen='print'; render();
     });
