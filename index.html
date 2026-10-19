@@ -1625,7 +1625,7 @@
 
   function openDetachedWindow(problem){
     var w = window.open('', 'nw-cbt-detached', 'width=900,height=820,resizable=yes,scrollbars=yes');
-    if(!w){ toast('ポップアップがブロックされました。許可してから再度お試しください'); return; }
+    if(!w){ return false; }
     var imgs = '';
     problem.pages.forEach(function(pg){
       var f = pg<10 ? ('0'+pg) : (''+pg);
@@ -1639,6 +1639,7 @@
       + '<scr'+'ipt>document.getElementById("z").addEventListener("input",function(){document.getElementById("wrap").style.width=this.value+"%";});</scr'+'ipt>';
     w.document.open(); w.document.write(doc); w.document.close();
     w.focus();
+    return true;
   }
 
   function setupMarkCanvas(canvas, img, key){
@@ -1876,7 +1877,9 @@
     });
 
     document.getElementById('btnStatus').addEventListener('click', function(){ setStatusOpen(!statusOpen); });
-    document.getElementById('btnDetach').addEventListener('click', function(){ openDetachedWindow(problem); });
+    document.getElementById('btnDetach').addEventListener('click', function(){
+      if(!openDetachedWindow(problem)) toast('ポップアップがブロックされました。許可してから再度お試しください');
+    });
     document.getElementById('btnLaterAll').addEventListener('click', function(){
       var items = allItems(problem);
       var allMarked = items.every(function(it){ return state.marked[it.id]; });
@@ -2109,7 +2112,7 @@
     var html='';
     var tk = examLabelFor(problem.id)+' '+problem.label, usedSec = state.timers['p'+problem.id]||0;
     html+='<div class="top-bar"><div class="title">解答一覧<small>'+problem.label+' '+escapeHtml(problem.title)+'</small></div><div class="top-spacer"></div>';
-    html+='<button class="small'+(resultProblemOpen?' navy':'')+'" id="btnResProblem">'+(resultProblemOpen?'問題を閉じる':'問題を確認する')+'</button></div>';
+    html+='<button class="small'+(resultProblemOpen?' navy':'')+'" id="btnResProblem" title="問題冊子を別ウィンドウで開きます">'+(resultProblemOpen?'問題を閉じる':'問題を確認する（別画面）')+'</button></div>';
     html+='<div class="result-wrap'+(resultProblemOpen?' with-problem':'')+'" id="resultWrap"><div class="result-problem" id="resProblem"></div><div class="result-main"><div class="result-inner">';
     html+='<h1>お疲れさまでした</h1>';
     html+='<p class="used-time">この問題（'+escapeHtml(tk)+'）で使った試験時間：'+Math.floor(usedSec/60)+'分'+(usedSec%60)+'秒（制限 '+EXAM_LIMIT_MIN+'分）</p>';
@@ -2156,9 +2159,11 @@
     root.innerHTML=html;
     renderProblemViewer(problem, document.getElementById('resProblem'));
     document.getElementById('btnResProblem').addEventListener('click', function(){
+      if(!resultProblemOpen && openDetachedWindow(problem)) return;
+      if(!resultProblemOpen) toast('別ウィンドウを開けないため、この画面の左側に表示します');
       resultProblemOpen = !resultProblemOpen;
       document.getElementById('resultWrap').classList.toggle('with-problem', resultProblemOpen);
-      this.textContent = resultProblemOpen ? '問題を閉じる' : '問題を確認する';
+      this.textContent = resultProblemOpen ? '問題を閉じる' : '問題を確認する（別画面）';
       this.classList.toggle('navy', resultProblemOpen);
     });
 
