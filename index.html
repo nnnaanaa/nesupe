@@ -1128,7 +1128,11 @@
   }
 
   function findProblem(id){ for(var i=0;i<PROBLEMS.length;i++){ if(PROBLEMS[i].id===id) return PROBLEMS[i]; } return null; }
-  function timerKey(){ return state.current==null ? null : examLabelFor(state.current); }
+  function timerKey(){ return state.current==null ? null : 'p'+state.current; }
+  function timerLabel(){
+    var pr = state.current==null ? null : findProblem(state.current);
+    return pr ? examLabelFor(pr.id)+' '+pr.label : '';
+  }
   function fmtHMS(sec){
     sec = Math.max(0, sec);
     function p(n){ return (n<10?'0':'')+n; }
@@ -1138,9 +1142,9 @@
     var k = timerKey();
     var used = k ? (state.timers[k]||0) : 0;
     var left = EXAM_LIMIT_SEC - used;
-    return '<div class="timer'+(left<=0?' over':(left<=300?' low':''))+'" id="examTimer" title="午後Ⅰ（'+EXAM_LIMIT_MIN+'分）の残り時間。この年度の問題を解いている間だけ進みます">'
+    return '<div class="timer'+(left<=0?' over':(left<=300?' low':''))+'" id="examTimer" title="午後Ⅰ（'+EXAM_LIMIT_MIN+'分）の残り時間。この問題を解いている間だけ進みます">'
       + '<span class="tl">残り時間</span><span class="tv mono" id="timerVal">'+fmtHMS(left)+'</span>'
-      + '<button class="ghost small" id="timerReset" title="この年度の試験時間を'+EXAM_LIMIT_MIN+'分に戻す">リセット</button></div>';
+      + '<button class="ghost small" id="timerReset" title="この問題の試験時間を'+EXAM_LIMIT_MIN+'分に戻す">リセット</button></div>';
   }
   function updateTimerUI(){
     var el = document.getElementById('timerVal'), box = document.getElementById('examTimer');
@@ -1156,7 +1160,7 @@
     if(!b) return;
     b.addEventListener('click', function(){
       var k = timerKey();
-      if(!k || !confirm(k+'の試験時間を'+EXAM_LIMIT_MIN+'分に戻します。よろしいですか？')) return;
+      if(!k || !confirm(timerLabel()+'の試験時間を'+EXAM_LIMIT_MIN+'分に戻します。よろしいですか？')) return;
       delete state.timers[k]; save(); updateTimerUI();
     });
   }
@@ -2103,12 +2107,12 @@
     var problem=findProblem(state.current);
     var history = state.history[problem.id] || [];
     var html='';
-    var tk = examLabelFor(problem.id), usedSec = state.timers[tk]||0;
+    var tk = examLabelFor(problem.id)+' '+problem.label, usedSec = state.timers['p'+problem.id]||0;
     html+='<div class="top-bar"><div class="title">解答一覧<small>'+problem.label+' '+escapeHtml(problem.title)+'</small></div><div class="top-spacer"></div>';
     html+='<button class="small'+(resultProblemOpen?' navy':'')+'" id="btnResProblem">'+(resultProblemOpen?'問題を閉じる':'問題を確認する')+'</button></div>';
     html+='<div class="result-wrap'+(resultProblemOpen?' with-problem':'')+'" id="resultWrap"><div class="result-problem" id="resProblem"></div><div class="result-main"><div class="result-inner">';
     html+='<h1>お疲れさまでした</h1>';
-    html+='<p class="used-time">この年度（'+escapeHtml(tk)+'）で使った試験時間：'+Math.floor(usedSec/60)+'分'+(usedSec%60)+'秒（制限 '+EXAM_LIMIT_MIN+'分）</p>';
+    html+='<p class="used-time">この問題（'+escapeHtml(tk)+'）で使った試験時間：'+Math.floor(usedSec/60)+'分'+(usedSec%60)+'秒（制限 '+EXAM_LIMIT_MIN+'分）</p>';
     html+='<div class="result-note">このツールに自動採点機能はありません。以下はあなたが入力した解答の控えです。IPA公式サイト（ipa.go.jp）で公開されている「'+escapeHtml(examLabelFor(problem.id))+' ネットワークスペシャリスト試験 午後I 解答例」を見ながら、各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。</div>';
 
     var hasModel = allItems(problem).some(function(it){ return MODEL_DATA[it.id]; });
