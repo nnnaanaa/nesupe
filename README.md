@@ -1,55 +1,55 @@
-# NW午後I CBT模試
+# NW Afternoon I CBT Mock Exam
 
-ネットワークスペシャリスト試験 午後Ⅰ（記述式）の過去問を、CBT試験に近い画面で1問ずつ解くための学習用Webツールです。
+A study tool for practicing past papers of the Japanese **Network Specialist Examination, Afternoon I (written-answer section)** on a screen that resembles the CBT (computer-based testing) exam, one problem at a time.
 
-公開ページ: https://nnnaanaa.github.io/nesupe/
+Live site: https://nnnaanaa.github.io/nesupe/
 
-サーバーを使わない静的サイト（`index.html` と問題画像）だけで動きます。解答・メモ・履歴は、利用しているブラウザの `localStorage` に保存され、外部へは送信されません。
+The app is a static site (`index.html` plus problem images) with no server. Answers, memos, and history are stored in your browser's `localStorage` and are never sent anywhere. The user interface and the exam content are in Japanese.
 
-## 収録している過去問
+## Included past exams
 
-| 年度 | 問題 | 模範解答・解説 |
+| Exam | Problems | Model answers and explanations |
 |---|---|---|
-| 令和3年度 春期 | 問1〜問3 | なし |
-| 令和元年度 秋期 | 問1〜問3 | なし |
-| 平成30年度 秋期 | 問1〜問3 | なし |
-| 平成29年度 秋期 | 問1〜問3 | あり |
-| 平成28年度 秋期 | 問1〜問3 | あり |
-| 平成27年度 秋期 | 問1〜問3 | あり |
-| 平成26年度 秋期 | 問1〜問3 | あり |
-| 平成25年度 秋期 | 問1〜問3 | あり |
+| Reiwa 3 (2021) Spring | Q1-Q3 | No |
+| Reiwa 1 (2019) Autumn | Q1-Q3 | No |
+| Heisei 30 (2018) Autumn | Q1-Q3 | No |
+| Heisei 29 (2017) Autumn | Q1-Q3 | Yes |
+| Heisei 28 (2016) Autumn | Q1-Q3 | Yes |
+| Heisei 27 (2015) Autumn | Q1-Q3 | Yes |
+| Heisei 26 (2014) Autumn | Q1-Q3 | Yes |
+| Heisei 25 (2013) Autumn | Q1-Q3 | Yes |
 
-- 問題は、IPA（情報処理推進機構）が公開している過去問題PDFを画像にしたものです（`pages/` 配下）。
-- 模範解答は、IPAが公開している解答例の内容です。解説は、このツールの作成者が書いたもので、IPA公式のものではありません。
-- 図を完成させる設問は、画面では作図できないため、文章で答える形にしています。
+- The problems are page images (under `pages/`) of the past exam papers published by IPA (Information-technology Promotion Agency, Japan).
+- The model answers follow the official answer keys published by IPA. The explanations were written by the author of this tool and are not official IPA material.
+- Questions that ask you to complete a diagram cannot be drawn on screen, so they are answered in text instead.
 
-## 主な機能
+## Features
 
-- 問題選択画面から、1問ずつ演習します。
-- 左に問題冊子、右に解答欄を並べ、境界をドラッグして幅を変えられます（スマホでは上下に並びます）。
-- 問題の拡大・縮小、マーカー（黄・青・赤）、メモ、電卓、白黒反転、問題の別ウィンドウ表示があります。
-- 1問ごとに45分の残り時間を表示します。0になっても入力は止まりません。
-- 字数制限のある解答欄は、上限を超える入力を受け付けません。
-- 「後で見直す」の印と、解答状況の一覧（未解答・解答済み・見直し・解答中）があります。
-- 結果画面で、自分の解答の確認、「正しい解答」の記入、問題の再確認、解答履歴の保存、印刷プレビュー、テキストのコピーができます。
-- 模範解答が付いている問題は、結果画面で模範解答と解説を表示できます（初期状態では隠れています）。
+- Pick a problem and solve it one at a time.
+- Problem booklet on the left, answer form on the right, with a draggable divider (stacked vertically on phones).
+- Zoom in/out, highlighter markers (yellow, blue, red), memo, calculator, inverted colors, and opening the problem in a separate window.
+- A 45-minute countdown for each problem. Input keeps working after it reaches zero.
+- Answer fields with a character limit reject input beyond the limit.
+- "Review later" flags and an overview of answer status (unanswered, answered, flagged, in progress).
+- On the result screen: review your answers, enter the "correct answer", re-read the problem, save the answer history, print preview, and copy as text.
+- For problems with model answers, the result screen can show the model answer and explanation (hidden by default).
 
-自動採点はありません。
+There is no automatic scoring. Compare your answers with the model answers and score yourself.
 
-## ローカルで動かす
+## Run locally
 
 ```
 py -3 -m http.server 8000
 ```
 
-その後、ブラウザで `http://localhost:8000/` を開きます。画像を読み込むため、`index.html` を直接開くのではなく、上のようにHTTPで配信してください。
+Then open `http://localhost:8000/` in a browser. Serve it over HTTP as above instead of opening `index.html` directly, because the problem images are loaded from files.
 
-## 構成
+## Structure
 
-- `index.html` : 画面・問題データ・模範解答をすべて含む単一ファイルです。
-- `pages/<年度>/NN.png` : 問題冊子のページ画像です。年度フォルダ名は、元号の頭文字（r：令和、h：平成）、年、春期(h)か秋期(a)の順です。例：`r03h`（令和3年度春期）、`r01a`（令和元年度秋期）、`h30a`（平成30年度秋期）。
-- `.gitignore` : 取得元のPDFと作業用フォルダを、リポジトリに含めないための設定です。
+- `index.html`: a single file containing the UI, the problem data, and the model answers.
+- `pages/<exam>/NN.png`: page images of the problem booklet. The folder name is the era (`r` = Reiwa, `h` = Heisei), the year, and the season (`h` = spring, `a` = autumn). Examples: `r03h` (Reiwa 3 spring), `r01a` (Reiwa 1 autumn), `h30a` (Heisei 30 autumn).
+- `.gitignore`: keeps the source PDFs and working folders out of the repository.
 
-## 出典と権利
+## Sources and rights
 
-問題文・図表・解答例の著作権は、出典元（IPA 情報処理推進機構）にあります。このリポジトリは、学習目的で、公開されている資料を画面で解きやすくしたものです。利用にあたっては、IPAが定める利用条件をご確認ください。解説文は作成者によるものです。
+The copyright of the problem texts, figures, and answer keys belongs to the original source (IPA, Information-technology Promotion Agency, Japan). This repository only makes publicly available materials easier to solve on screen, for study purposes. Please check IPA's terms of use before reusing them. The explanations were written by the author of this tool.
