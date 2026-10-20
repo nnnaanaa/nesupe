@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NW午後I CBT模試</title>
-<meta name="description" content="ネットワークスペシャリスト試験 午後I の過去問（令和3年度春期〜平成25年度秋期）をCBT形式で解く学習ツール">
+<meta name="description" content="ネットワークスペシャリスト試験 午後I の過去問（令和3年度春期〜平成25年度秋期）を、CBT形式の画面で1問ずつ解く学習ツール。一部の年度はIPA公式の解答例と解説つき">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
@@ -1235,10 +1235,16 @@
 
     html += '<h2>注意事項</h2>';
     html += '<ul class="rules">';
-    html += '<li>本問題は<b>紙の過去問題（ネットワークスペシャリスト試験 午後I）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
+    html += '<li>IPAが公開している<b>過去問題（ネットワークスペシャリスト試験 午後I）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
     html += '<li>下から<b>1問ずつ選んで</b>演習できます。途中で他の問題に切り替えても、それぞれの解答は個別に保存されます。</li>';
     html += '<li>解答は自動的にこの端末（ブラウザ）に保存されます。閉じても続きから再開できます。</li>';
-    html += '<li>本ツールに採点機能はありません。学習後に表示される解答一覧を、IPA公式サイトで公開されている解答例と照らして自己採点してください。</li>';
+    html += '<li>各問題には、1問ごとに<b>'+EXAM_LIMIT_MIN+'分</b>の残り時間が表示されます。時間が0になっても、解答は続けられます。</li>';
+    var modelYears = EXAM_GROUPS.filter(function(g){
+      return g.ids.every(function(pid){ return allItems(findProblem(pid)).every(function(it){ return MODEL_DATA[it.id]; }); });
+    }).map(function(g){ return g.title; });
+    html += '<li>自動採点はありません。解答一覧で自分の解答を確認し、自己採点してください。'
+      + (modelYears.length ? 'IPA公式の解答例と解説（解説は当ツール作成者によるもの）が付いているのは、'+escapeHtml(modelYears.join('、'))+'です。' : '')
+      + 'それ以外の年度は、IPA公式サイトの解答例と照らしてください。</li>';
     html += '</ul>';
 
     EXAM_GROUPS.forEach(function(group){
@@ -1258,8 +1264,6 @@
       });
       html += '</div>';
     });
-
-    html += '<div style="font-size:12.5px;color:var(--text-muted);margin-top:14px;">時間の計測はありません。自分のペースで解答できます。</div>';
 
     html += '</div></div></div>';
     root.innerHTML = html;
@@ -2120,7 +2124,13 @@
     html+='<div class="result-wrap'+(resultProblemOpen?' with-problem':'')+'" id="resultWrap"><div class="result-problem" id="resProblem"></div><div class="result-main"><div class="result-inner">';
     html+='<h1>お疲れさまでした</h1>';
     html+='<p class="used-time">この問題（'+escapeHtml(tk)+'）で使った試験時間：'+Math.floor(usedSec/60)+'分'+(usedSec%60)+'秒（制限 '+EXAM_LIMIT_MIN+'分）</p>';
-    html+='<div class="result-note">このツールに自動採点機能はありません。以下はあなたが入力した解答の控えです。IPA公式サイト（ipa.go.jp）で公開されている「'+escapeHtml(examLabelFor(problem.id))+' ネットワークスペシャリスト試験 午後I 解答例」を見ながら、各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。</div>';
+    var hasModelNote = allItems(problem).some(function(it){ return MODEL_DATA[it.id]; });
+    html+='<div class="result-note">自動採点はありません。以下はあなたが入力した解答の控えです。'
+      + (hasModelNote
+          ? '「模範解答と解説を表示」でIPA公式の解答例と解説（解説は当ツール作成者によるもの）を確認できます。'
+          : 'この問題には模範解答がまだ付いていません。IPA公式サイト（ipa.go.jp）で公開されている「'+escapeHtml(examLabelFor(problem.id))+' ネットワークスペシャリスト試験 午後I 解答例」を見ながら、')
+      + (hasModelNote ? '「模範解答を「正しい解答」欄に転記」を使うと、自分の解答と並べて記録できます。' : '各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。')
+      + '</div>';
 
     var hasModel = allItems(problem).some(function(it){ return MODEL_DATA[it.id]; });
     if(hasModel){
