@@ -1,10 +1,11 @@
-# NW Afternoon I CBT Mock Exam
+# NW Afternoon CBT Mock Exam
 
-A CBT-style practice tool for past papers of the Japanese Network Specialist Examination (Afternoon I), solved one problem at a time.
+A CBT-style practice tool for past papers of the Japanese Network Specialist Examination (Afternoon I and II), solved one problem at a time.
 
 Live site: https://nnnaanaa.github.io/nesupe/
 
-- Past exams from Reiwa 3 (2021) spring to Heisei 25 (2013) autumn. Model answers are included for Heisei 25-29.
+- Afternoon I: Reiwa 3 (2021) spring to Heisei 25 (2013) autumn. Model answers are included for Heisei 25-29.
+- Afternoon II: Heisei 30 (2018) autumn (no model answers yet).
 - Static site (`index.html` plus page images). Answers and history are saved only in your browser (`localStorage`).
 - The UI and exam content are in Japanese.
 

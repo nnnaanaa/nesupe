@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NW午後I CBT模試</title>
-<meta name="description" content="ネットワークスペシャリスト試験 午後I の過去問（令和3年度春期〜平成25年度秋期）を、CBT形式の画面で1問ずつ解く学習ツール。一部の年度はIPA公式の解答例と解説つき">
+<title>NW午後 CBT模試</title>
+<meta name="description" content="ネットワークスペシャリスト試験 午後I・午後II の過去問（令和3年度春期〜平成25年度秋期）を、CBT形式の画面で1問ずつ解く学習ツール。一部の年度はIPA公式の解答例と解説つき">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
@@ -156,6 +156,7 @@
     .cover-meta .k{ margin-top:0; }
   }
   .cover-body h2{ font-size:15px; margin:0 0 10px; }
+  .group-note{ font-size:12.5px; color:var(--text-muted); margin:-4px 0 10px; }
   .rules{ margin:0 0 24px; padding-left:1.3em; color:var(--text-muted); font-size:13.5px; }
   .rules li{ margin-bottom:5px; }
   .rules b{ color:var(--text); }
@@ -1041,13 +1042,16 @@
     {"id": 21, "label": "問3", "title": "ネットワークのセキュリティ対策", "lede": "地域金融機関X銀行のインターネットバンキング。DoS攻撃とDNSの設計、侵入検査、インシデント管理の手順がテーマ。", "folder": "h26a", "pages": [10, 11, 12, 13, 14], "groups": [{"mon": "設問1", "note": "本文中の空欄に入れる適切な字句を答えよ。", "items": [{"id": "c1-1-1", "sub": "ア", "type": "text", "limit": 0, "prompt": "「多数のコンピュータが標的サーバを集中的に攻撃する［ ア ］型DoS攻撃は、発信元のコンピュータの特定が難しい」の ア に入る字句。"}, {"id": "c1-1-2", "sub": "イ", "type": "text", "limit": 0, "prompt": "「TCPのパケットを大量に送信し、応答待ちにして新たな接続を妨害するSYN［ イ ］攻撃や、UDPパケットを使ったUDP［ イ ］攻撃」の イ に入る字句。"}, {"id": "c1-1-3", "sub": "ウ", "type": "text", "limit": 0, "prompt": "「他のDNSサーバにも問合せを行い、最終的な結果を返信する［ ウ ］的な問合せ」の ウ に入る字句。"}, {"id": "c1-1-4", "sub": "エ", "type": "text", "limit": 0, "prompt": "「発信元のIPアドレスを詐称して、問合せの結果を標的サーバ宛てに送信させるDNS［ エ ］攻撃」の エ に入る字句。"}, {"id": "c1-1-5", "sub": "オ", "type": "text", "limit": 0, "prompt": "「実際に脆弱性があるかどうか調査するための侵入検査、いわゆる［ オ ］テスト」の オ に入る字句。"}]}, {"mon": "設問2", "note": "〔サイバー攻撃対策〕について", "items": [{"id": "c1-2-1", "sub": "(1)", "type": "text", "limit": 0, "prompt": "本文中の［ a ］（オープンリゾルバを用いた攻撃に関して、自らも攻撃の［ a ］とならないようにすることが重要）に入れる適切な字句を答えよ。"}, {"id": "c1-2-2", "sub": "(2)", "type": "text", "limit": 30, "prompt": "大量のパケットを送信する攻撃として、大きなサイズのICMPエコー応答を使ったものがある。この攻撃を防御するために、図1中のFWがもつべき機能は何か。30字以内で具体的に述べよ。"}]}, {"mon": "設問3", "note": "〔DNSのセキュリティ対策〕について", "items": [{"id": "c1-3-1", "sub": "(1)", "type": "text", "limit": 20, "prompt": "本文中の下線①の対策をとらなかった場合、どのようなセキュリティ上の脆弱性が考えられるか。20字以内で述べよ。"}, {"id": "c1-3-2", "sub": "(2)", "type": "fields", "limit": 0, "prompt": "本文中のセキュリティ対策を実施した場合の、図2中の空欄のDNSサーバと、DNS問合せ及びゾーン転送について、凡例に従って図2を完成させよ。（図は画像で作図できないため、各空欄のDNSサーバの種別と、追加する矢印を文章で答える）", "fields": [{"key": "dmz", "label": "DMZの空欄のDNSサーバ"}, {"key": "naibu1", "label": "内部セグメントの空欄のDNSサーバ（PCから問い合わせを受ける側）"}, {"key": "naibu2", "label": "内部セグメントの空欄のDNSサーバ（ゾーン転送を受ける側）"}, {"key": "arrows", "label": "追加するDNS問合せ・ゾーン転送の矢印（向きを含めて）"}]}, {"id": "c1-3-3", "sub": "(3)", "type": "fields", "limit": 0, "prompt": "本文中の下線②で、内部から外部への不正な通信を発見又は防止するために必要な、FWでの対策を二つ挙げ、それぞれ30字以内で述べよ。", "fields": [{"key": "m1", "label": "対策（1）（30字以内）", "limit": 30}, {"key": "m2", "label": "対策（2）（30字以内）", "limit": 30}]}]}, {"mon": "設問4", "note": "〔インシデント管理〕について", "items": [{"id": "c1-4-1", "sub": "(1)", "type": "text", "limit": 15, "prompt": "図3中の［ b ］は、セキュリティ担当者の対応として必要な、ネットワークに係る作業である。その作業の内容を15字以内で答えよ。"}, {"id": "c1-4-2", "sub": "(2)", "type": "text", "limit": 30, "prompt": "対処結果の報告後、将来発生するインシデントへの対応として、セキュリティ担当者が実施すべき事項がある。その内容を30字以内で述べよ。"}]}]},
     {"id": 22, "label": "問1", "title": "リモート接続ネットワークの検討", "lede": "ソフトウェア開発会社A社の開発システムを関連会社B社にも使わせるSSL-VPN。ポートフォワード方式、FWの許可設定、証明書と運用の設計がテーマ。", "folder": "h25a", "pages": [3, 4, 5, 6], "groups": [{"mon": "設問1", "note": "本文中の空欄に入れる適切な字句を答えよ。", "items": [{"id": "r1-1-1", "sub": "ア", "type": "text", "limit": 0, "prompt": "「ハンドシェイクプロトコルでは、［ ア ］メッセージによって暗号化アルゴリズムを決定し」の ア に入る字句。"}, {"id": "r1-1-2", "sub": "イ", "type": "text", "limit": 0, "prompt": "「127.0.0.1～［ イ ］の範囲内で利用可能である」（ループバックアドレスの範囲の上限）の イ に入る字句。"}, {"id": "r1-1-3", "sub": "ウ", "type": "text", "limit": 0, "prompt": "「ループバックアドレス127.0.1.10を資産管理サーバの［ ウ ］に対応付けるように設計した」の ウ に入る字句。"}, {"id": "r1-1-4", "sub": "エ", "type": "text", "limit": 0, "prompt": "「証明書が、信頼できる認証機関である［ エ ］から発行されていることを、PC側で検証する」の エ に入る字句。"}]}, {"mon": "設問2", "note": "〔リモート接続ネットワーク構成の検討〕について", "items": [{"id": "r1-2-1", "sub": "(1)", "type": "text", "limit": 20, "prompt": "本文中の下線①について、ループバックアドレスを用いる利点を、セキュリティ面に着目して、20字以内で述べよ。"}, {"id": "r1-2-2", "sub": "(2)", "type": "text", "limit": 20, "prompt": "本文中の下線②について、使用できないアプリケーションの通信の特徴を、図2に着目して、20字以内で述べよ。"}, {"id": "r1-2-3", "sub": "(3)", "type": "fields", "limit": 0, "prompt": "本文と図2の内容を基に、PCのブラウザから資産管理サーバのAP1への接続に際し、Javaアプレットが受け付けるIPアドレスとポート番号を答えよ。また、そのときのJavaアプレットと資産管理サーバとの間で確立されるTCPコネクションを、図2中の名称を用いて二つ答えよ。", "fields": [{"key": "ip", "label": "IPアドレス"}, {"key": "port", "label": "ポート番号"}, {"key": "c1", "label": "TCPコネクション（1）"}, {"key": "c2", "label": "TCPコネクション（2）"}]}, {"id": "r1-2-4", "sub": "(4)", "type": "text", "limit": 30, "prompt": "本文中の下線③について、設定の目的を、“SSLセッション”という字句を用いて、30字以内で述べよ。"}]}, {"mon": "設問3", "note": "表1中の空欄に入れる適切な字句を答えよ。", "items": [{"id": "r1-3-1", "sub": "オ", "type": "text", "limit": 0, "prompt": "表1「外部LAN→DMZ」（宛先ポート53）の「宛先IPアドレス」［ オ ］に入る適切な字句。"}, {"id": "r1-3-2", "sub": "カ", "type": "text", "limit": 0, "prompt": "表1「外部LAN→DMZ」（送信元61.x.42.94、宛先202.y.63.11）の「宛先ポート番号」［ カ ］に入る適切な字句。"}, {"id": "r1-3-3", "sub": "キ", "type": "text", "limit": 0, "prompt": "表1「DMZ→内部LAN」（宛先10.10.10.1、ポート11000、AP1用）の「送信元IPアドレス」［ キ ］に入る適切な字句。"}, {"id": "r1-3-4", "sub": "ク", "type": "text", "limit": 0, "prompt": "表1「DMZ→内部LAN」（宛先10.10.10.2、ポート23、AP2用）の「送信元IPアドレス」［ ク ］に入る適切な字句。"}, {"id": "r1-3-5", "sub": "ケ", "type": "text", "limit": 0, "prompt": "表1「DMZ→内部LAN」（宛先10.10.10.2、ポート13000、AP3用）の「送信元IPアドレス」［ ケ ］に入る適切な字句。"}]}, {"mon": "設問4", "note": "〔リモート接続ネットワークの運用の検討〕について", "items": [{"id": "r1-4-1", "sub": "(1)", "type": "text", "limit": 20, "prompt": "本文中の下線④の情報を、20字以内で述べよ。"}, {"id": "r1-4-2", "sub": "(2)", "type": "fields", "limit": 0, "prompt": "本文中の下線⑤の機能を、ログイン時とログアウト時のそれぞれについて、35字以内で具体的に述べよ。", "fields": [{"key": "in", "label": "ログイン時（35字以内）", "limit": 35}, {"key": "out", "label": "ログアウト時（35字以内）", "limit": 35}]}]}]},
     {"id": 23, "label": "問2", "title": "端末の管理強化", "lede": "雑貨企業Z社のIPアドレス自動割当て（DHCP）。DHCPスヌーピング導入と、増設SWで起きたブロードキャストの折り返し障害の調査がテーマ。", "folder": "h25a", "pages": [7, 8, 9, 10], "groups": [{"mon": "設問1", "note": "本文中の空欄に入れる適切な字句を答えよ。", "items": [{"id": "d1-1-1", "sub": "ア", "type": "text", "limit": 0, "prompt": "「ルータ2でDHCP［ ア ］を動作させて商品本部での割当てに対応させている」の ア に入る字句。"}, {"id": "d1-1-2", "sub": "イ", "type": "text", "limit": 0, "prompt": "「ルータ又はWebサーバの［ イ ］テーブルからIPアドレスとMACアドレスの対応を調べ」の イ に入る字句。"}, {"id": "d1-1-3", "sub": "ウ", "type": "text", "limit": 0, "prompt": "「OUI（［ ウ ］に固有の値）」の ウ に入る字句。"}, {"id": "d1-1-4", "sub": "エ", "type": "text", "limit": 0, "prompt": "「L2SW1に［ エ ］ポートを設定してトラフィックモニタを接続し」の エ に入る字句。"}, {"id": "d1-1-5", "sub": "オ", "type": "text", "limit": 0, "prompt": "「DHCPサーバを見つけるためのメッセージである［ オ ］、及びDHCPREQUESTにフラグビットを立てて」の オ に入る字句。"}]}, {"mon": "設問2", "note": "〔IPアドレス割当ての仕組みと経緯〕について", "items": [{"id": "d1-2-1", "sub": "(1)", "type": "text", "limit": 0, "prompt": "本文中の［ a ］（「［ a ］GHz帯の電波を使用するIEEE 802.11a規格」）に入れる適切な数値を答えよ。"}, {"id": "d1-2-2", "sub": "(2)", "type": "text", "limit": 15, "prompt": "本文中の下線①では、何が起きたことで通信に障害が発生したのか。15字以内で答えよ。"}, {"id": "d1-2-3", "sub": "(3)", "type": "text", "limit": 15, "prompt": "本文中の下線②では、BBルータのポートのうち、SWに接続したポートは何を接続すべきポートであったのか。15字以内で答えよ。"}]}, {"mon": "設問3", "note": "〔端末の管理強化策の立案と確認〕について", "items": [{"id": "d1-3-1", "sub": "(1)", "type": "fields", "limit": 0, "prompt": "本文中の［ b ］、［ c ］に入れる適切な数値を答えよ。（b：MACアドレスの上位何ビットがOUIか。c：正規の4メッセージより多い、送受信されたメッセージ数）", "fields": [{"key": "b", "label": "b"}, {"key": "c", "label": "c"}]}, {"id": "d1-3-2", "sub": "(2)", "type": "fields", "limit": 0, "prompt": "O主任がU君に指示した、固定IPアドレスの割当て及び暫定運用中の対処に必要なDHCPサーバの機能を、それぞれ30字以内で述べよ。", "fields": [{"key": "fixed", "label": "固定IPアドレスの割当て（30字以内）", "limit": 30}, {"key": "tmp", "label": "暫定運用中の対処（30字以内）", "limit": 30}]}, {"id": "d1-3-3", "sub": "(3)", "type": "text", "limit": 35, "prompt": "作業3の動作確認中に起きた障害の原因となった機器の動作を、図1中の機器名を用いて、35字以内で述べよ。"}, {"id": "d1-3-4", "sub": "(4)", "type": "text", "limit": 40, "prompt": "O主任が本文中の下線③で実現しようとしているネットワーク構成を、“VLAN”という字句を用いて、40字以内で述べよ。"}]}]},
-    {"id": 24, "label": "問3", "title": "ネットワークの再構築", "lede": "ITサービス会社C社のデータセンタ共通NW基盤。IEEE 802.1Qトンネリング（VLAN）と、リンクアグリゲーション・VRF・仮想化の設計がテーマ。", "folder": "h25a", "pages": [11, 12, 13, 14], "groups": [{"mon": "設問1", "note": "本文中の空欄に入れる適切な字句を答えよ。", "items": [{"id": "v1-1-1", "sub": "ア", "type": "text", "limit": 0, "prompt": "「VLAN用の［ ア ］は、32ビットで構成され、VIDには［ イ ］ビットが割り当てられる」の ア に入る字句。"}, {"id": "v1-1-2", "sub": "イ", "type": "text", "limit": 0, "prompt": "同文の イ に入る数値。"}, {"id": "v1-1-3", "sub": "ウ", "type": "text", "limit": 0, "prompt": "「リンクアグリゲーション機能によって、リンクの冗長化、［ ウ ］の有効活用を実現することができる」の ウ に入る字句。"}, {"id": "v1-1-4", "sub": "エ", "type": "text", "limit": 0, "prompt": "「VRF機能は、一つのルータやL3SWに、複数の独立した仮想［ エ ］を稼働させる機能である」の エ に入る字句。"}, {"id": "v1-1-5", "sub": "オ", "type": "text", "limit": 0, "prompt": "「複数の物理筐体を接続し、単一のスイッチとして機能させる［ オ ］機能を使用する」の オ に入る字句。"}]}, {"mon": "設問2", "note": "〔IEEE 802.1Qトンネリング〕について、図2を参照し、(1)～(4)に答えよ。", "items": [{"id": "v1-2-1", "sub": "(1)", "type": "text", "limit": 0, "prompt": "SA及びDAのアドレスの種別を答えよ。"}, {"id": "v1-2-2", "sub": "(2)", "type": "fields", "limit": 0, "prompt": "フレーム番号①～③のDA、SAの該当機器名を答えよ。ここで、フレーム番号①のSAの該当機器は、SV1であることを前提とする。", "fields": [{"key": "f1da", "label": "フレーム①のDA"}, {"key": "f1sa", "label": "フレーム①のSA"}, {"key": "f2da", "label": "フレーム②のDA"}, {"key": "f2sa", "label": "フレーム②のSA"}, {"key": "f3da", "label": "フレーム③のDA"}, {"key": "f3sa", "label": "フレーム③のSA"}]}, {"id": "v1-2-3", "sub": "(3)", "type": "text", "limit": 0, "prompt": "フレーム番号③の網掛け部分を適切に分割し、フィールド名を記入せよ。（図中の網掛け部分に入るフィールドを、並び順に答える）"}, {"id": "v1-2-4", "sub": "(4)", "type": "fields", "limit": 0, "prompt": "本文中の下線部（Ⅰ）の問題を二つ挙げ、それぞれ30字以内で述べよ。", "fields": [{"key": "p1", "label": "問題（1）（30字以内）", "limit": 30}, {"key": "p2", "label": "問題（2）（30字以内）", "limit": 30}]}]}, {"mon": "設問3", "note": "〔NWの仮想化〕について", "items": [{"id": "v1-3-1", "sub": "(1)", "type": "text", "limit": 0, "prompt": "図3を完成させよ。（図は作図できないため、L3SWにつながる機器を文章で答える）"}, {"id": "v1-3-2", "sub": "(2)", "type": "fields", "limit": 0, "prompt": "NW基盤の冗長構成を利用するには、顧客システムのL2SWから2本のケーブルを、NW基盤のL2SWの別々の筐体に接続する。その際に両方のL2SWで対応する方法が2種類ある。その方法を、それぞれ30字以内で述べよ。", "fields": [{"key": "m1", "label": "方法（1）（30字以内）", "limit": 30}, {"key": "m2", "label": "方法（2）（30字以内）", "limit": 30}]}, {"id": "v1-3-3", "sub": "(3)", "type": "text", "limit": 40, "prompt": "D君の構成案において、FW装置に必要な機能を、40字以内で述べよ。"}]}]}
+    {"id": 24, "label": "問3", "title": "ネットワークの再構築", "lede": "ITサービス会社C社のデータセンタ共通NW基盤。IEEE 802.1Qトンネリング（VLAN）と、リンクアグリゲーション・VRF・仮想化の設計がテーマ。", "folder": "h25a", "pages": [11, 12, 13, 14], "groups": [{"mon": "設問1", "note": "本文中の空欄に入れる適切な字句を答えよ。", "items": [{"id": "v1-1-1", "sub": "ア", "type": "text", "limit": 0, "prompt": "「VLAN用の［ ア ］は、32ビットで構成され、VIDには［ イ ］ビットが割り当てられる」の ア に入る字句。"}, {"id": "v1-1-2", "sub": "イ", "type": "text", "limit": 0, "prompt": "同文の イ に入る数値。"}, {"id": "v1-1-3", "sub": "ウ", "type": "text", "limit": 0, "prompt": "「リンクアグリゲーション機能によって、リンクの冗長化、［ ウ ］の有効活用を実現することができる」の ウ に入る字句。"}, {"id": "v1-1-4", "sub": "エ", "type": "text", "limit": 0, "prompt": "「VRF機能は、一つのルータやL3SWに、複数の独立した仮想［ エ ］を稼働させる機能である」の エ に入る字句。"}, {"id": "v1-1-5", "sub": "オ", "type": "text", "limit": 0, "prompt": "「複数の物理筐体を接続し、単一のスイッチとして機能させる［ オ ］機能を使用する」の オ に入る字句。"}]}, {"mon": "設問2", "note": "〔IEEE 802.1Qトンネリング〕について、図2を参照し、(1)～(4)に答えよ。", "items": [{"id": "v1-2-1", "sub": "(1)", "type": "text", "limit": 0, "prompt": "SA及びDAのアドレスの種別を答えよ。"}, {"id": "v1-2-2", "sub": "(2)", "type": "fields", "limit": 0, "prompt": "フレーム番号①～③のDA、SAの該当機器名を答えよ。ここで、フレーム番号①のSAの該当機器は、SV1であることを前提とする。", "fields": [{"key": "f1da", "label": "フレーム①のDA"}, {"key": "f1sa", "label": "フレーム①のSA"}, {"key": "f2da", "label": "フレーム②のDA"}, {"key": "f2sa", "label": "フレーム②のSA"}, {"key": "f3da", "label": "フレーム③のDA"}, {"key": "f3sa", "label": "フレーム③のSA"}]}, {"id": "v1-2-3", "sub": "(3)", "type": "text", "limit": 0, "prompt": "フレーム番号③の網掛け部分を適切に分割し、フィールド名を記入せよ。（図中の網掛け部分に入るフィールドを、並び順に答える）"}, {"id": "v1-2-4", "sub": "(4)", "type": "fields", "limit": 0, "prompt": "本文中の下線部（Ⅰ）の問題を二つ挙げ、それぞれ30字以内で述べよ。", "fields": [{"key": "p1", "label": "問題（1）（30字以内）", "limit": 30}, {"key": "p2", "label": "問題（2）（30字以内）", "limit": 30}]}]}, {"mon": "設問3", "note": "〔NWの仮想化〕について", "items": [{"id": "v1-3-1", "sub": "(1)", "type": "text", "limit": 0, "prompt": "図3を完成させよ。（図は作図できないため、L3SWにつながる機器を文章で答える）"}, {"id": "v1-3-2", "sub": "(2)", "type": "fields", "limit": 0, "prompt": "NW基盤の冗長構成を利用するには、顧客システムのL2SWから2本のケーブルを、NW基盤のL2SWの別々の筐体に接続する。その際に両方のL2SWで対応する方法が2種類ある。その方法を、それぞれ30字以内で述べよ。", "fields": [{"key": "m1", "label": "方法（1）（30字以内）", "limit": 30}, {"key": "m2", "label": "方法（2）（30字以内）", "limit": 30}]}, {"id": "v1-3-3", "sub": "(3)", "type": "text", "limit": 40, "prompt": "D君の構成案において、FW装置に必要な機能を、40字以内で述べよ。"}]}]},
+    {"id": 25, "label": "問1", "title": "機械メーカのIoTサービス基盤の設計", "lede": "機械メーカX社が、顧客の工場の機器とX社のサーバをMQTTでつなぐXシステムを検討。TLSによるセキュリティ、MQTTのQoS、APIの認可（トークン）、エッジサーバとNATを使う将来構想がテーマ。", "folder": "h30a_pm2", "pages": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "groups": [{"mon": "設問1", "note": "〔ネットワークセキュリティ対策〕について、(1)〜(3)に答えよ。", "items": [{"id": "k1-1-1", "sub": "(1) ア", "type": "text", "limit": 0, "prompt": "「TLSには、情報を［ ア ］する機能、……」の ア に入る字句。"}, {"id": "k1-1-2", "sub": "(1) イ", "type": "text", "limit": 0, "prompt": "「……、情報の改ざんを［ イ ］する機能、……」の イ に入る字句。"}, {"id": "k1-1-3", "sub": "(1) ウ", "type": "text", "limit": 0, "prompt": "「……、及び通信相手を［ ウ ］する機能がある」の ウ に入る字句。"}, {"id": "k1-1-4", "sub": "(1) エ", "type": "text", "limit": 0, "prompt": "「機器間の［ エ ］コネクションの確立要求は、工場からX社の方向に行われる」の エ に入る字句。"}, {"id": "k1-1-5", "sub": "(2)", "type": "text", "limit": 50, "prompt": "本文中の下線①（通信装置内のFWを使った対策）の対策を、50字以内で述べよ。"}, {"id": "k1-1-6", "sub": "(3)", "type": "text", "limit": 30, "prompt": "本文中の下線②（TLSの機能を使った、デバイス及びエッジサーバに関する対策）の対策を、30字以内で述べよ。"}]}, {"mon": "設問2", "note": "〔MQTTを使ったメッセージ交換方式〕について、(1)〜(4)に答えよ。", "items": [{"id": "k1-2-1", "sub": "(1)", "type": "text", "limit": 45, "prompt": "図3中のQoSレベルが0の場合のメッセージ送信について、TCPの再送機能だけではメッセージの消失が防げないのはどのような場合か。45字以内で具体的に答えよ。"}, {"id": "k1-2-2", "sub": "(2)", "type": "text", "limit": 20, "prompt": "本文中の下線③（PUBLISHを受信した受信者は、メッセージの処理を始める前にPUBRECを送信し、その応答であるPUBRELを受信してからメッセージの処理を開始する）について、PUBRELを受信するまで、メッセージの処理を保留する目的を、20字以内で述べよ。"}, {"id": "k1-2-3", "sub": "(3) オ", "type": "text", "limit": 0, "prompt": "「項番1では、デバイスDiは、あらかじめ［ オ ］を交換サーバに送信し、トピック名が［ カ ］のPUBLISHが送信されるようにする」の オ に入る字句。"}, {"id": "k1-2-4", "sub": "(3) カ", "type": "text", "limit": 0, "prompt": "同上の カ に入る字句（トピック名）。"}, {"id": "k1-2-5", "sub": "(3) キ", "type": "text", "limit": 0, "prompt": "「交換サーバからデバイスDiへのPUBLISH送信中に［ キ ］が電源断などで非稼働になった場合、そのPUBLISHは、［ ク ］の中に保存され、稼働再開後に再送される」の キ に入る字句。"}, {"id": "k1-2-6", "sub": "(3) ク", "type": "text", "limit": 0, "prompt": "同上の ク に入る字句。"}, {"id": "k1-2-7", "sub": "(3) ケ", "type": "text", "limit": 0, "prompt": "「項番2では、QoSレベルとして0が使用されている。これは、［ ケ ］及びエッジサーバは安定した稼働が見込めるからである」の ケ に入る字句。"}, {"id": "k1-2-8", "sub": "(4) コ", "type": "text", "limit": 0, "prompt": "「ただし、図1に示すように、［ コ ］は同一拠点に設置されている必要がある」の コ に入る適切な機器名を全て答えよ。"}]}, {"mon": "設問3", "note": "〔APIにアクセスする顧客サーバの管理〕について、(1)〜(3)に答えよ。", "items": [{"id": "k1-3-1", "sub": "(1) サ", "type": "text", "limit": 0, "prompt": "「図6中の（I）に示すように、有効なトークンがない場合、WebブラウザからWebAPへの情報要求は、［ サ ］サーバにリダイレクトされる」の サ に入る字句。"}, {"id": "k1-3-2", "sub": "(1) シ", "type": "text", "limit": 0, "prompt": "「認可応答では、認可要求で通知されたURIを用いたリダイレクトによって、［ シ ］に認可コードが通知される」の シ に入る字句。"}, {"id": "k1-3-3", "sub": "(1) ス", "type": "text", "limit": 0, "prompt": "「アクセストークンの有効期間を過ぎた場合でも、［ ス ］の有効期間内であれば、利用者の確認を行わずに、新しいアクセストークンが発行される」の ス に入る字句。"}, {"id": "k1-3-4", "sub": "(1) セ", "type": "text", "limit": 0, "prompt": "「図6中の“(a) 認可要求”のredirect_uriパラメタが書き換えられ、図6中の［ セ ］に含まれる認可コードが意図しない宛先に送信される可能性がある」の セ に入る字句。"}, {"id": "k1-3-5", "sub": "(1) ソ", "type": "text", "limit": 0, "prompt": "「“redirect_uriパラメタの確認”は、図6中の［ ソ ］サーバに、HTTPリクエストに含まれるURIとあらかじめ登録されている絶対URIが一致することを確認させる、という対策である」の ソ に入る字句。"}, {"id": "k1-3-6", "sub": "(2)", "type": "text", "limit": 0, "prompt": "本文中の下線④（アクセストークンの有効期間を10分間、リフレッシュトークンの有効期間を60分間と想定）について、提供するAPIの範囲を変更する場合、変更が有効になるのは、X社がアクセストークンを変更してから最長で何分後かを答えよ。"}, {"id": "k1-3-7", "sub": "(3)", "type": "text", "limit": 40, "prompt": "本文中の下線⑤（顧客向けのAPI利用ガイドラインには、この対策に必要な顧客への依頼内容を明記する）について、顧客への依頼内容を、40字以内で述べよ。"}]}, {"mon": "設問4", "note": "〔エッジサーバを活用する将来構想〕について、(1)〜(4)に答えよ。", "items": [{"id": "k1-4-1", "sub": "(1)", "type": "text", "limit": 60, "prompt": "図8中のNATルータについて、顧客ネットワークからXシステムの方向の通信におけるアドレス変換の内容を、60字以内で具体的に述べよ。"}, {"id": "k1-4-2", "sub": "(2)", "type": "text", "limit": 40, "prompt": "図8中の顧客FWについて、Xシステムとの接続のために、新たに許可が必要になる通信を40字以内で答えよ。"}, {"id": "k1-4-3", "sub": "(3)", "type": "text", "limit": 0, "prompt": "本文中の下線⑥（MQTTブリッジには、トピック名をあらかじめ定義しておき、そのトピック名のメッセージを交換サーバと送受信させる）について、定義するトピック名を全て答えよ。"}, {"id": "k1-4-4", "sub": "(4) 1つ目", "type": "text", "limit": 30, "prompt": "図7〜9中の顧客サーバを1台追加する場合、Xシステム側で必要となる対応を二つ挙げ、それぞれ30字以内で述べよ。（1つ目）"}, {"id": "k1-4-5", "sub": "(4) 2つ目", "type": "text", "limit": 30, "prompt": "同上（2つ目）。"}]}]},
+    {"id": 26, "label": "問2", "title": "サービス基盤の構築（従来方式とOpenFlow）", "lede": "ホスティング事業者Y社が、マルチテナント方式のIaaSのサービス基盤を構築。従来方式（VLAN、冗長FW・LB）とOpenFlowによるSDN方式を比べ、Fテーブルによるパケット転送制御を設計する。", "folder": "h30a_pm2", "pages": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], "groups": [{"mon": "設問1", "note": "本文中の空欄に入れる適切な字句を答えよ。", "items": [{"id": "k2-1-1", "sub": "ア", "type": "text", "limit": 0, "prompt": "「L2SWaとL2SWbの間及びL2SWcとL2SWdの間は、［ ア ］接続して、それぞれ一つのL2SWとして動作できるようにする」の ア に入る字句。"}, {"id": "k2-1-2", "sub": "イ", "type": "text", "limit": 0, "prompt": "「セッション情報を継承することで、仮想FWの［ イ ］フェールオーバを実現している」の イ に入る字句。"}, {"id": "k2-1-3", "sub": "ウ", "type": "text", "limit": 0, "prompt": "「クラスタグループごとに仮想IPアドレスと［ ウ ］アルゴリズムが設定できるので、複数の顧客の処理を1台で行える」の ウ に入る字句。"}, {"id": "k2-1-4", "sub": "エ", "type": "text", "limit": 0, "prompt": "「物理サーバには2枚のNICを実装し、［ エ ］機能を利用してアクティブ／アクティブの状態にする」の エ に入る字句。"}]}, {"mon": "設問2", "note": "〔従来方式でのサービス基盤の構成案〕について、(1)〜(3)に答えよ。", "items": [{"id": "k2-2-1", "sub": "(1)", "type": "text", "limit": 30, "prompt": "本文中の下線①（装置の中に複数の仮想FWを稼働させることができ）の要件が必要になる理由を、30字以内で述べよ。"}, {"id": "k2-2-2", "sub": "(2) 1つ目", "type": "text", "limit": 25, "prompt": "本文中の下線②（装置の冗長化ができる）の機能について、アクティブのFWをFWaからFWbに切り替えるのに、FWa又はFWbが監視する内容を三つ挙げ、図2中の機器名を用いて、それぞれ25字以内で答えよ。（1つ目）"}, {"id": "k2-2-3", "sub": "(2) 2つ目", "type": "text", "limit": 25, "prompt": "同上（2つ目）。"}, {"id": "k2-2-4", "sub": "(2) 3つ目", "type": "text", "limit": 25, "prompt": "同上（3つ目）。"}, {"id": "k2-2-5", "sub": "(3)", "type": "text", "limit": 50, "prompt": "本文中の下線③（L2SWcとL2SWdには、仮想サーバの物理サーバ間移動に必要となるVLANを設定する）について、VLANを設定するポート及び設定するVLANの内容を、50字以内で具体的に述べよ。"}]}, {"mon": "設問3", "note": "本文中の下線④の情報を、15字以内で答えよ。", "items": [{"id": "k2-3-1", "sub": "", "type": "text", "limit": 15, "prompt": "本文中の下線④（OFSの導入時には、OFCとのTCPコネクションの確立に必要な最小限の情報を設定すればよい）の情報を、15字以内で答えよ。"}]}, {"mon": "設問4", "note": "〔二つの方式の比較〕について、(1)、(2)に答えよ。", "items": [{"id": "k2-4-1", "sub": "(1) 1つ目", "type": "text", "limit": 15, "prompt": "表1中の項番2について、従来方式の場合、FWでは複数の仮想FWを設定することになる。仮想FWの設定に伴って、各仮想FWに対して設定が必要なネットワーク情報を三つ挙げ、それぞれ15字以内で答えよ。（1つ目）"}, {"id": "k2-4-2", "sub": "(1) 2つ目", "type": "text", "limit": 15, "prompt": "同上（2つ目）。"}, {"id": "k2-4-3", "sub": "(1) 3つ目", "type": "text", "limit": 15, "prompt": "同上（3つ目）。"}, {"id": "k2-4-4", "sub": "(2)", "type": "text", "limit": 40, "prompt": "表1中の項番3について、従来方式の場合、追加する顧客に対応したVLAN設定がサービス基盤の全ての機器及びサーバで必要になる。その中で、ポートVLANを設定する箇所を、図2中の名称を用いて、40字以内で答えよ。"}]}, {"mon": "設問5", "note": "〔技術習得を目的とした制御方式の設計〕について、(1)〜(4)に答えよ。", "items": [{"id": "k2-5-1", "sub": "(1) 問題", "type": "text", "limit": 40, "prompt": "本番システムにおいて、図4の形態で3顧客の仮想サーバを配置した場合に発生する可能性がある問題を、40字以内で述べよ。"}, {"id": "k2-5-2", "sub": "(1) 配置", "type": "text", "limit": 40, "prompt": "その問題を発生させないための仮想サーバの配置を、40字以内で述べよ。"}, {"id": "k2-5-3", "sub": "(2)", "type": "text", "limit": 70, "prompt": "表8のFテーブル4中には、FWpの内部側のポートからLBpの仮想IPアドレスをもつポートに、パケットを転送させるためのFエントリが生成されない。当該FエントリがなくてもFWpとLBp間の通信が行われる理由を、70字以内で述べよ。"}, {"id": "k2-5-4", "sub": "(3) オ", "type": "text", "limit": 0, "prompt": "【パケット転送処理手順】「ルータ→L2SW→Fテーブル0，項番1→［ オ ］→FWp→LBp→［ カ ］→［ キ ］→Webサーバp1」の オ に入る適切なFテーブル名と項番（Fテーブル名は、Fテーブル0〜4から選ぶ。項番は表4〜8中の項番で答える）。"}, {"id": "k2-5-5", "sub": "(3) カ", "type": "text", "limit": 0, "prompt": "同上の カ に入る適切なFテーブル名と項番。"}, {"id": "k2-5-6", "sub": "(3) キ", "type": "text", "limit": 0, "prompt": "同上の キ に入る適切なFテーブル名と項番。"}, {"id": "k2-5-7", "sub": "(4) OFS名", "type": "text", "limit": 0, "prompt": "P社のWebサーバp4が物理サーバ2に移動し、表7のOFS1のFテーブル3中の項番5によって、OFCにPacket-Inメッセージが送信されると、OFCは表8のFテーブル4中の二つの項番を変更する。Fテーブル4が変更されるOFS名を全て答えよ。"}, {"id": "k2-5-8", "sub": "(4) 項番とアクション", "type": "text", "limit": 0, "prompt": "同上について、項番3のほかに変更される項番及び変更後のアクションを答えよ。"}]}]}
   ];
 
   var EXAM_GROUPS = [
     {title:"令和3年度 春期", ids:[1,2,3]},
     {title:"令和元年度 秋期", ids:[4,5,6]},
     {title:"平成30年度 秋期", ids:[10,11,12]},
+    {title:"平成30年度 秋期", part:"午後II", limit:120, ids:[25,26], note:"午後IIは、2問のうち1問を選んで解答します（試験時間は2時間）。当ツールでは、2問とも解けます。"},
     {title:"平成29年度 秋期", ids:[7,8,9]},
     {title:"平成28年度 秋期", ids:[16,17,18]},
     {title:"平成27年度 秋期", ids:[13,14,15]},
@@ -1145,16 +1149,16 @@
   function timerHtml(){
     var k = timerKey();
     var used = k ? (state.timers[k]||0) : 0;
-    var left = EXAM_LIMIT_SEC - used;
-    return '<div class="timer'+(left<=0?' over':(left<=300?' low':''))+'" id="examTimer" title="午後Ⅰ（'+EXAM_LIMIT_MIN+'分）の残り時間。この問題を解いている間だけ進みます">'
+    var lim = limitMinFor(state.current), left = lim*60 - used;
+    return '<div class="timer'+(left<=0?' over':(left<=300?' low':''))+'" id="examTimer" title="'+examPartFor(state.current)+'（'+lim+'分）の残り時間。この問題を解いている間だけ進みます">'
       + '<span class="tl">残り時間</span><span class="tv mono" id="timerVal">'+fmtHMS(left)+'</span>'
-      + '<button class="ghost small" id="timerReset" title="この問題の試験時間を'+EXAM_LIMIT_MIN+'分に戻す">リセット</button></div>';
+      + '<button class="ghost small" id="timerReset" title="この問題の試験時間を'+lim+'分に戻す">リセット</button></div>';
   }
   function updateTimerUI(){
     var el = document.getElementById('timerVal'), box = document.getElementById('examTimer');
     var k = timerKey();
     if(!el || !k) return;
-    var left = EXAM_LIMIT_SEC - (state.timers[k]||0);
+    var left = limitMinFor(state.current)*60 - (state.timers[k]||0);
     el.textContent = fmtHMS(left);
     box.classList.toggle('low', left>0 && left<=300);
     box.classList.toggle('over', left<=0);
@@ -1164,7 +1168,7 @@
     if(!b) return;
     b.addEventListener('click', function(){
       var k = timerKey();
-      if(!k || !confirm(timerLabel()+'の試験時間を'+EXAM_LIMIT_MIN+'分に戻します。よろしいですか？')) return;
+      if(!k || !confirm(timerLabel()+'の試験時間を'+limitMinFor(state.current)+'分に戻します。よろしいですか？')) return;
       delete state.timers[k]; save(); updateTimerUI();
     });
   }
@@ -1175,15 +1179,25 @@
     var used = (state.timers[k]||0) + 1;
     state.timers[k] = used;
     updateTimerUI();
-    if(used===EXAM_LIMIT_SEC) toast('試験時間の'+EXAM_LIMIT_MIN+'分が経過しました（続けて解答できます）');
+    if(used===limitMinFor(state.current)*60) toast('試験時間の'+limitMinFor(state.current)+'分が経過しました（続けて解答できます）');
     if(used%5===0) save();
   }, 1000);
   document.addEventListener('visibilitychange', function(){ if(document.hidden) save(); });
 
-  function examLabelFor(problemId){
-    for(var i=0;i<EXAM_GROUPS.length;i++){ if(EXAM_GROUPS[i].ids.indexOf(problemId)>=0) return EXAM_GROUPS[i].title; }
-    return '';
+  function groupOf(problemId){
+    for(var i=0;i<EXAM_GROUPS.length;i++){ if(EXAM_GROUPS[i].ids.indexOf(problemId)>=0) return EXAM_GROUPS[i]; }
+    return null;
   }
+  function examPartFor(problemId){ var g = groupOf(problemId); return g && g.part ? g.part : '午後I'; }
+  function examLabelFor(problemId){
+    var g = groupOf(problemId);
+    return g ? g.title + (g.part ? ' ' + g.part : '') : '';
+  }
+  function examTitleFor(problemId){
+    var g = groupOf(problemId);
+    return (g ? g.title : '') + ' ネットワークスペシャリスト試験 ' + examPartFor(problemId);
+  }
+  function limitMinFor(problemId){ var g = groupOf(problemId); return g && g.limit ? g.limit : EXAM_LIMIT_MIN; }
   function allItems(problem){
     var out=[];
     problem.groups.forEach(function(g){ g.items.forEach(function(it){ out.push(it); }); });
@@ -1224,31 +1238,32 @@
     var html = '';
     html += '<div class="cover-wrap"><div class="cover">';
     html += '<div class="cover-band"><span class="tag">CBT方式 学習モード</span>';
-    html += '<h1>ネットワークスペシャリスト試験 午後I 過去問</h1>';
+    html += '<h1>ネットワークスペシャリスト試験 午後I・午後II 過去問</h1>';
     html += '<p>記述式の過去問題を、CBT形式の画面で1問ずつ演習できる学習用ツール</p></div>';
     html += '<div class="cover-body">';
     html += '<div class="cover-meta">';
-    html += '<div><div class="k">出題年度</div><div class="v">'+EXAM_GROUPS.length+'年度分</div></div>';
+    html += '<div><div class="k">出題年度</div><div class="v">'+Object.keys(EXAM_GROUPS.reduce(function(m,g){ m[g.title]=1; return m; },{})).length+'年度分</div></div>';
     html += '<div><div class="k">解答方式</div><div class="v">記述式</div></div>';
     html += '<div><div class="k">採点</div><div class="v">自己採点</div></div>';
     html += '</div>';
 
     html += '<h2>注意事項</h2>';
     html += '<ul class="rules">';
-    html += '<li>IPAが公開している<b>過去問題（ネットワークスペシャリスト試験 午後I）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
+    html += '<li>IPAが公開している<b>過去問題（ネットワークスペシャリスト試験 午後I・午後II）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
     html += '<li>下から<b>1問ずつ選んで</b>演習できます。途中で他の問題に切り替えても、それぞれの解答は個別に保存されます。</li>';
     html += '<li>解答は自動的にこの端末（ブラウザ）に保存されます。閉じても続きから再開できます。</li>';
-    html += '<li>各問題には、1問ごとに<b>'+EXAM_LIMIT_MIN+'分</b>の残り時間が表示されます。時間が0になっても、解答は続けられます。</li>';
+    html += '<li>各問題には、1問ごとの残り時間が表示されます（午後Iは<b>'+EXAM_LIMIT_MIN+'分</b>、午後IIは<b>120分</b>）。時間が0になっても、解答は続けられます。</li>';
     var modelYears = EXAM_GROUPS.filter(function(g){
       return g.ids.every(function(pid){ return allItems(findProblem(pid)).every(function(it){ return MODEL_DATA[it.id]; }); });
-    }).map(function(g){ return g.title; });
+    }).map(function(g){ return g.title + (g.part ? ' ' + g.part : ''); });
     html += '<li>自動採点はありません。解答一覧で自分の解答を確認し、自己採点してください。'
       + (modelYears.length ? 'IPA公式の解答例と解説（解説は当ツール作成者によるもの）が付いているのは、'+escapeHtml(modelYears.join('、'))+'です。' : '')
       + 'それ以外の年度は、IPA公式サイトの解答例と照らしてください。</li>';
     html += '</ul>';
 
     EXAM_GROUPS.forEach(function(group){
-      html += '<h2>'+escapeHtml(group.title)+'</h2>';
+      html += '<h2>'+escapeHtml(group.title)+' '+escapeHtml(group.part || '午後I')+'</h2>';
+      if(group.note) html += '<div class="group-note">'+escapeHtml(group.note)+'</div>';
       html += '<div class="pick-grid">';
       group.ids.forEach(function(pid){
         var p = findProblem(pid);
@@ -1994,7 +2009,7 @@
   function buildTranscript(problem, answersSrc){
     answersSrc = answersSrc || state.answers;
     var lines=[];
-    lines.push(examLabelFor(problem.id)+' ネットワークスペシャリスト試験 午後I － 解答控え');
+    lines.push(examTitleFor(problem.id)+' － 解答控え');
     lines.push('■ '+problem.label+' '+problem.title);
     lines.push('');
     problem.groups.forEach(function(g){
@@ -2123,12 +2138,12 @@
     html+='<button class="small'+(resultProblemOpen?' navy':'')+'" id="btnResProblem" title="問題冊子を別ウィンドウで開きます">'+(resultProblemOpen?'問題を閉じる':'問題を確認する（別画面）')+'</button></div>';
     html+='<div class="result-wrap'+(resultProblemOpen?' with-problem':'')+'" id="resultWrap"><div class="result-problem" id="resProblem"></div><div class="result-main"><div class="result-inner">';
     html+='<h1>お疲れさまでした</h1>';
-    html+='<p class="used-time">この問題（'+escapeHtml(tk)+'）で使った試験時間：'+Math.floor(usedSec/60)+'分'+(usedSec%60)+'秒（制限 '+EXAM_LIMIT_MIN+'分）</p>';
+    html+='<p class="used-time">この問題（'+escapeHtml(tk)+'）で使った試験時間：'+Math.floor(usedSec/60)+'分'+(usedSec%60)+'秒（制限 '+limitMinFor(problem.id)+'分）</p>';
     var hasModelNote = allItems(problem).some(function(it){ return MODEL_DATA[it.id]; });
     html+='<div class="result-note">自動採点はありません。以下はあなたが入力した解答の控えです。'
       + (hasModelNote
           ? '「模範解答と解説を表示」でIPA公式の解答例と解説（解説は当ツール作成者によるもの）を確認できます。'
-          : 'この問題には模範解答がまだ付いていません。IPA公式サイト（ipa.go.jp）で公開されている「'+escapeHtml(examLabelFor(problem.id))+' ネットワークスペシャリスト試験 午後I 解答例」を見ながら、')
+          : 'この問題には模範解答がまだ付いていません。IPA公式サイト（ipa.go.jp）で公開されている「'+escapeHtml(examTitleFor(problem.id))+' 解答例」を見ながら、')
       + (hasModelNote ? '「模範解答を「正しい解答」欄に転記」を使うと、自分の解答と並べて記録できます。' : '各設問の「正しい解答」欄に書き写すと、自分の解答と並べて記録できます。')
       + '</div>';
 
@@ -2251,7 +2266,7 @@
 
     html+='<div class="print-wrap"><div class="print-page">';
     html+='<div class="print-head">';
-    html+='<h1>'+escapeHtml(examLabelFor(problem.id))+' ネットワークスペシャリスト試験 午後I － 解答控え</h1>';
+    html+='<h1>'+escapeHtml(examTitleFor(problem.id))+' － 解答控え</h1>';
     html+='<div class="print-sub">'+problem.label+' '+escapeHtml(problem.title)+'</div>';
     html+='<div class="print-meta">印刷日：'+fmtDateTime(Date.now())+'</div>';
     html+='</div>';
