@@ -156,6 +156,11 @@
     .cover-meta .k{ margin-top:0; }
   }
   .cover-body h2{ font-size:15px; margin:0 0 10px; }
+  .part-tabs{ display:flex; gap:8px; margin:0 0 16px; }
+  .part-tabs button{ flex:1; padding:11px 8px; font-size:15px; font-weight:700; border:1px solid var(--border-strong); background:var(--surface); color:var(--text); border-radius:8px; cursor:pointer; }
+  .part-tabs button small{ display:block; font-size:11.5px; font-weight:500; color:var(--text-muted); margin-top:2px; }
+  .part-tabs button.on{ background:#5b5c96; border-color:#5b5c96; color:#fff; }
+  .part-tabs button.on small{ color:#e8ebff; }
   .group-note{ font-size:12.5px; color:var(--text-muted); margin:-4px 0 10px; }
   .rules{ margin:0 0 24px; padding-left:1.3em; color:var(--text-muted); font-size:13.5px; }
   .rules li{ margin-bottom:5px; }
@@ -1243,35 +1248,52 @@
   }
 
   /* ============================= RENDER: COVER ============================= */
+  var PART_KEY = "nw-cover-part";
+  function groupPart(g){ return g.part || '午後I'; }
+  function getCoverPart(){
+    var v = null;
+    try{ v = localStorage.getItem(PART_KEY); }catch(e){}
+    if(v==='午後I' || v==='午後II') return v;
+    var g = state.current ? groupOf(state.current) : null;
+    return g ? groupPart(g) : '午後I';
+  }
+  function setCoverPart(v){ try{ localStorage.setItem(PART_KEY, v); }catch(e){} }
+
   function renderCover(root){
+    var part = getCoverPart();
+    var groups = EXAM_GROUPS.filter(function(g){ return groupPart(g)===part; });
     var html = '';
     html += '<div class="cover-wrap"><div class="cover">';
     html += '<div class="cover-band"><span class="tag">CBT方式 学習モード</span>';
-    html += '<h1>ネットワークスペシャリスト試験 午後I・午後II 過去問</h1>';
+    html += '<h1>ネットワークスペシャリスト試験 '+escapeHtml(part)+' 過去問</h1>';
     html += '<p>記述式の過去問題を、CBT形式の画面で1問ずつ演習できる学習用ツール</p></div>';
     html += '<div class="cover-body">';
+    html += '<div class="part-tabs">'
+      + '<button data-part="午後I" class="'+(part==='午後I'?'on':'')+'">午後I<small>1問 '+EXAM_LIMIT_MIN+'分・3問</small></button>'
+      + '<button data-part="午後II" class="'+(part==='午後II'?'on':'')+'">午後II<small>1問 120分・2問</small></button>'
+      + '</div>';
     html += '<div class="cover-meta">';
-    html += '<div><div class="k">出題年度</div><div class="v">'+Object.keys(EXAM_GROUPS.reduce(function(m,g){ m[g.title]=1; return m; },{})).length+'年度分</div></div>';
+    html += '<div><div class="k">出題年度</div><div class="v">'+groups.length+'年度分</div></div>';
     html += '<div><div class="k">解答方式</div><div class="v">記述式</div></div>';
     html += '<div><div class="k">採点</div><div class="v">自己採点</div></div>';
     html += '</div>';
 
     html += '<h2>注意事項</h2>';
     html += '<ul class="rules">';
-    html += '<li>IPAが公開している<b>過去問題（ネットワークスペシャリスト試験 午後I・午後II）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
+    html += '<li>IPAが公開している<b>過去問題（ネットワークスペシャリスト試験 '+escapeHtml(part)+'）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
     html += '<li>下から<b>1問ずつ選んで</b>演習できます。途中で他の問題に切り替えても、それぞれの解答は個別に保存されます。</li>';
     html += '<li>解答は自動的にこの端末（ブラウザ）に保存されます。閉じても続きから再開できます。</li>';
-    html += '<li>各問題には、1問ごとの残り時間が表示されます（午後Iは<b>'+EXAM_LIMIT_MIN+'分</b>、午後IIは<b>120分</b>）。時間が0になっても、解答は続けられます。</li>';
-    var modelYears = EXAM_GROUPS.filter(function(g){
+    html += '<li>各問題には、1問ごとの残り時間が表示されます（'+escapeHtml(part)+'は<b>'+(part==='午後II'?120:EXAM_LIMIT_MIN)+'分</b>）。時間が0になっても、解答は続けられます。</li>';
+    var modelYears = groups.filter(function(g){
       return g.ids.every(function(pid){ return allItems(findProblem(pid)).every(function(it){ return MODEL_DATA[it.id]; }); });
-    }).map(function(g){ return g.title + ' ' + (g.part || '午後I'); });
+    }).map(function(g){ return g.title; });
     html += '<li>自動採点はありません。解答一覧で自分の解答を確認し、自己採点してください。'
       + (modelYears.length ? 'IPA公式の解答例と解説（解説は当ツール作成者によるもの）が付いているのは、'+escapeHtml(modelYears.join('、'))+'です。' : '')
       + 'それ以外の年度は、IPA公式サイトの解答例と照らしてください。</li>';
     html += '</ul>';
 
-    EXAM_GROUPS.forEach(function(group){
-      html += '<h2>'+escapeHtml(group.title)+' '+escapeHtml(group.part || '午後I')+'</h2>';
+    groups.forEach(function(group){
+      html += '<h2>'+escapeHtml(group.title)+'</h2>';
       if(group.note) html += '<div class="group-note">'+escapeHtml(group.note)+'</div>';
       html += '<div class="pick-grid">';
       group.ids.forEach(function(pid){
@@ -1292,6 +1314,12 @@
     html += '</div></div></div>';
     root.innerHTML = html;
 
+    root.querySelectorAll('[data-part]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        setCoverPart(btn.getAttribute('data-part'));
+        render();
+      });
+    });
     root.querySelectorAll('[data-select]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var pid = Number(btn.getAttribute('data-select'));
