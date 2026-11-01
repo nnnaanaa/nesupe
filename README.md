@@ -28,7 +28,7 @@ Then open `http://localhost:18420/`.
 - A small Kotlin server (JDK `HttpServer`, no extra libraries) serves `index.html` and `pages/`, and stores your answers, history and notes in `./data/state.json` (a volume), so they survive restarts and are shared by every browser that opens the same server.
 - The first time a browser connects, its existing local data is merged into the server data. If the same item exists on both sides, the more recently saved one wins.
 - When there is no server API (GitHub Pages, or `py -3 -m http.server`), the app behaves exactly as before and saves only in the browser.
-- The port is `18420` (chosen to avoid common ports) and it listens on `127.0.0.1` only. Use `PORT=9000` or `BIND=0.0.0.0` (for other devices on your LAN) as environment variables. There is no authentication, so use it only on a trusted network.
+- The port is `18420` (chosen to avoid common ports) and it listens on all interfaces (`0.0.0.0`), so other machines on the network can use it. There is no authentication, so use it only on a trusted network. Set `BIND=127.0.0.1` to allow this machine only, or `PORT=9000` to change the port.
 - To back up, copy `data/state.json`.
 
 ## Sources and rights
