@@ -1,0 +1,8 @@
+.git
+_src
+data
+*.pdf
+README.md
+docker-compose.yml
+server/build
+server/.gradle

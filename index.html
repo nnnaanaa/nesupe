@@ -1111,6 +1111,7 @@
 
 
   var STORE_KEY = "nw-r03h-pm1-cbt-mock-v3";
+  var stateSavedAt = 0;
 
   /* ============================= STATE ============================= */
   var state = {
@@ -1135,6 +1136,7 @@
       state.correct = saved.correct || {};
       state.marks = saved.marks || {};
       state.timers = saved.timers || {};
+      stateSavedAt = saved.savedAt || 0;
     }
   })();
   var zoomLevel = 100;
@@ -1146,12 +1148,75 @@
   var EXAM_LIMIT_MIN = 45, EXAM_LIMIT_SEC = EXAM_LIMIT_MIN*60;
   var HISTORY_LIMIT = 20;
 
+  function stateSnapshot(){
+    return {
+      answers:state.answers, marked:state.marked, memos:state.memos, history:state.history, correct:state.correct, marks:state.marks, timers:state.timers,
+      savedAt:stateSavedAt
+    };
+  }
   function save(){
-    try{
-      localStorage.setItem(STORE_KEY, JSON.stringify({
-        answers:state.answers, marked:state.marked, memos:state.memos, history:state.history, correct:state.correct, marks:state.marks, timers:state.timers
-      }));
-    }catch(e){}
+    stateSavedAt = Date.now();
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(stateSnapshot())); }catch(e){}
+    scheduleServerSave();
+  }
+
+  /* ============================= SERVER SYNC =============================
+     Docker（ローカルサーバ）で動かしているときだけ、解答・履歴をサーバ（data/state.json）にも保存する。
+     GitHub Pages など api/state が無い環境では何もせず、従来どおりブラウザ（localStorage）だけに保存する。 */
+  var API_URL = 'api/state';
+  var STATE_KEYS = ['answers','marked','memos','history','correct','marks','timers'];
+  var serverMode = false, serverTimer = null, serverWarned = false;
+
+  function pushToServer(keepalive){
+    if(!serverMode) return;
+    clearTimeout(serverTimer); serverTimer = null;
+    var body = JSON.stringify(stateSnapshot());
+    fetch(API_URL, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body:body,
+      keepalive: !!keepalive && body.length < 60000
+    }).then(function(r){
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      serverWarned = false;
+    }).catch(function(){
+      if(!serverWarned){ serverWarned = true; toast('サーバに保存できませんでした（ブラウザには保存済み）'); }
+    });
+  }
+  function scheduleServerSave(){
+    if(!serverMode) return;
+    clearTimeout(serverTimer);
+    serverTimer = setTimeout(function(){ pushToServer(false); }, 500);
+  }
+  document.addEventListener('visibilitychange', function(){ if(document.hidden && serverTimer) pushToServer(true); });
+
+  /* 起動時：サーバの保存データとブラウザのデータを合わせる。
+     同じ項目が両方にあるときは、保存時刻が新しいほうを採用する（片方にしかない項目は残す）。 */
+  function mergeFromServer(s){
+    var serverNewer = !!s && (s.savedAt||0) >= stateSavedAt;
+    var any = false;
+    STATE_KEYS.forEach(function(k){
+      var local = state[k] || {}, remote = (s && s[k]) || {};
+      var base = serverNewer ? local : remote, top = serverNewer ? remote : local;
+      var out = {};
+      Object.keys(base).forEach(function(key){ out[key] = base[key]; });
+      Object.keys(top).forEach(function(key){ out[key] = top[key]; });
+      state[k] = out;
+      if(Object.keys(out).length) any = true;
+    });
+    if(any) save();
+  }
+  function probeServer(done){
+    if(!window.fetch || location.protocol === 'file:'){ done(); return; }
+    var finished = false;
+    function fin(){ if(!finished){ finished = true; done(); } }
+    var t = setTimeout(fin, 1500);
+    fetch(API_URL, {cache:'no-store'}).then(function(r){
+      if(!r.ok) throw 0;
+      return r.json();
+    }).then(function(j){
+      if(finished || !j || j.app !== 'nesupe-server') throw 0;
+      serverMode = true;
+      mergeFromServer(j.state);
+    }).catch(function(){}).then(function(){ clearTimeout(t); fin(); });
   }
   function clearProblemData(problemId){
     allItems(findProblem(problemId)).forEach(function(it){ delete state.answers[it.id]; delete state.marked[it.id]; });
@@ -1316,7 +1381,9 @@
     html += '<ul class="rules">';
     html += '<li>IPAが公開している<b>過去問題（ネットワークスペシャリスト試験 '+escapeHtml(part)+'）</b>を、CBT試験を想定した画面で解答できるようにしたものです。</li>';
     html += '<li>下から<b>1問ずつ選んで</b>演習できます。途中で他の問題に切り替えても、それぞれの解答は個別に保存されます。</li>';
-    html += '<li>解答は自動的にこの端末（ブラウザ）に保存されます。閉じても続きから再開できます。</li>';
+    html += serverMode
+      ? '<li>解答は自動的に<b>このサーバ</b>（とブラウザ）に保存されます。閉じても、別の端末からでも、続きから再開できます。</li>'
+      : '<li>解答は自動的にこの端末（ブラウザ）に保存されます。閉じても続きから再開できます。</li>';
     html += '<li>各問題には、1問ごとの残り時間が表示されます（'+escapeHtml(part)+'は<b>'+(part==='午後II'?120:EXAM_LIMIT_MIN)+'分</b>）。時間が0になっても、解答は続けられます。</li>';
     var modelYears = groups.filter(function(g){
       return g.ids.every(function(pid){ return allItems(findProblem(pid)).every(function(it){ return MODEL_DATA[it.id]; }); });
@@ -2365,6 +2432,6 @@
     else if(state.screen==="print"){ renderPrintPreview(); }
   }
 
-  render();
+  probeServer(render);
 })();
 </script>

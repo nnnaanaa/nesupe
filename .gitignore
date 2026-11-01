@@ -1,2 +1,5 @@
 *.pdf
 _src/
+data/
+server/build/
+server/.gradle/
