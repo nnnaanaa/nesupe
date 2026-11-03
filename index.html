@@ -197,6 +197,10 @@
   }
   .pick-card .ttl{ font-weight:700; font-size:14.5px; margin-bottom:4px; color:var(--text); }
   .pick-card .desc{ font-size:12.5px; color:var(--text-muted); }
+  /* 令和の試験では出題されにくい内容の問題（選択は可能） */
+  .pick-card.dim{ filter:grayscale(1); opacity:.55; background:var(--surface-alt); }
+  .pick-card.dim:hover{ opacity:.85; }
+  .pick-card .dim-note{ margin-top:8px; font-size:12px; font-weight:700; color:var(--text-muted); }
   .pick-status{
     display:inline-block; margin-top:10px; font-size:11.5px; font-weight:700;
     padding:3px 9px; border-radius:999px; background:var(--surface-alt); color:var(--text-muted);
@@ -1360,6 +1364,11 @@
 
   /* ============================= RENDER: COVER ============================= */
   var PART_KEY = "nw-cover-part";
+  /* 令和の試験では出題されにくい内容の問題。グレー表示にするだけで、解くことはできる。 */
+  var DIM_PROBLEMS = {
+    39: 'Webプロキシの接続順序・先読みなど、当時の構成に依存した内容が中心です。',
+    42: 'Auto MDI/MDI-X、PoE給電のAP、無線LANの通信速度など、古い機器や規格の話が中心です。'
+  };
   function groupPart(g){ return g.part || '午後I'; }
   function getCoverPart(){
     var v = null;
@@ -1403,6 +1412,8 @@
     html += '<li>自動採点はありません。解答一覧で自分の解答を確認し、自己採点してください。'
       + (modelYears.length ? 'IPA公式の解答例と解説（解説は当ツール作成者によるもの）が付いているのは、'+escapeHtml(modelYears.join('、'))+'です。' : '')
       + 'それ以外の年度は、IPA公式サイトの解答例と照らしてください。</li>';
+    var anyDim = groups.some(function(g){ return g.ids.some(function(pid){ return DIM_PROBLEMS[pid]; }); });
+    if(anyDim) html += '<li>グレーで表示している問題は、<b>令和の試験では出題されにくい内容</b>です。飛ばして構いませんが、選んで解くこともできます。</li>';
     html += '</ul>';
 
     groups.forEach(function(group){
@@ -1414,11 +1425,13 @@
         var pr = progressOf(p);
         var statusText = pr.done===0 ? '未着手' : (pr.done>=pr.total ? '解答済み' : pr.done+' / '+pr.total+' 解答済み');
         var statusClass = pr.done===0 ? '' : (pr.done>=pr.total ? 'done' : 'partial');
-        html += '<button class="pick-card select" data-select="'+p.id+'">';
+        var dimWhy = DIM_PROBLEMS[p.id];
+        html += '<button class="pick-card select'+(dimWhy?' dim':'')+'" data-select="'+p.id+'"'+(dimWhy?' title="'+escapeHtml(dimWhy)+'"':'')+'>';
         html += '<div class="num">'+p.label+'</div>';
         html += '<div class="ttl">'+p.title+'</div>';
         html += '<div class="desc">'+p.lede+'</div>';
         html += '<div class="pick-status '+statusClass+'">'+statusText+'</div>';
+        if(dimWhy) html += '<div class="dim-note">令和では出題されにくい内容：'+escapeHtml(dimWhy)+'</div>';
         html += '</button>';
       });
       html += '</div>';
