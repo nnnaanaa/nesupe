@@ -4,8 +4,8 @@ A CBT-style practice tool for past papers of the Japanese Network Specialist Exa
 
 Live site: https://nnnaanaa.github.io/nesupe/
 
-- Afternoon I: Reiwa 3 (2021) spring to Heisei 21 (2009) autumn. Model answers are included for Heisei 21-29.
-- Afternoon II: Heisei 21 (2009) to Heisei 30 (2018) autumn, plus Reiwa 1 autumn and Reiwa 3-5 spring. Model answers are included for all of them.
+- Afternoon I: Reiwa 7 (2025) spring to Heisei 21 (2009) autumn. Model answers are included for Reiwa 4-7 spring and Heisei 21-29.
+- Afternoon II: Heisei 21 (2009) to Heisei 30 (2018) autumn, plus Reiwa 1 autumn and Reiwa 3-7 spring. Model answers are included for all of them (Reiwa 6 spring problem 2 question 5 was withdrawn by IPA and is not included).
 - Static site (`index.html` plus page images). On GitHub Pages, answers and history are saved only in your browser (`localStorage`).
 - The UI and exam content are in Japanese.
 
