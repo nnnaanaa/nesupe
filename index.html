@@ -1366,8 +1366,11 @@
   var PART_KEY = "nw-cover-part";
   /* 令和の試験では出題されにくい内容の問題。グレー表示にするだけで、解くことはできる。 */
   var DIM_PROBLEMS = {
+    36: '電力線・同軸ケーブル・電話配線を使うLAN製品の選定など、古い技術が中心です。',
     39: 'Webプロキシの接続順序・先読みなど、当時の構成に依存した内容が中心です。',
-    42: 'Auto MDI/MDI-X、PoE給電のAP、無線LANの通信速度など、古い機器や規格の話が中心です。'
+    42: 'Auto MDI/MDI-X、PoE給電のAP、無線LANの通信速度など、古い機器や規格の話が中心です。',
+    51: '電話回線数の算定（呼損率）とFCoEが中心です。VPN接続とルーティングの設問は今も有効です。',
+    55: '無線LAN規格の混在（RTS/CTS、自己CTS）が中心です。802.1X認証と認証基盤の設問は今も有効です。'
   };
   function groupPart(g){ return g.part || '午後I'; }
   function getCoverPart(){
