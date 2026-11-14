@@ -1387,6 +1387,8 @@
   /* ============================= RENDER: COVER ============================= */
   var PART_KEY = "nw-cover-part";
   /* 令和の試験では出題されにくい内容の問題。グレー表示にするだけで、解くことはできる。 */
+  /* 設問文を表示せず、「設問2 (1)」のような設問番号だけを出す問題（令和7年度春期）。問題本文のページ画像で設問文を読む。 */
+  var NUM_ONLY_PROBLEMS = {76:1,77:1,78:1,79:1,80:1};
   var DIM_PROBLEMS = {
     36: '電力線・同軸ケーブル・電話配線を使うLAN製品の選定など、古い技術が中心です。',
     39: 'Webプロキシの接続順序・先読みなど、当時の構成に依存した内容が中心です。',
@@ -1536,13 +1538,17 @@
     return html;
   }
 
-  function renderQCard(it){
+  function renderQCard(it, numOnlyMon){
     var answered = isAnswered(it);
     var marked = !!state.marked[it.id];
     var html = '<div class="qcard'+(answered?' answered':'')+(marked?' marked':'')+'" id="card-'+it.id+'">';
     html += '<div class="qcard-head"><span class="status-dot"></span>';
-    if(it.sub) html+='<span class="sub">'+escapeHtml(it.sub)+'</span>';
-    html += '<span class="prompt">'+escapeHtml(it.prompt)+'</span>';
+    if(numOnlyMon){
+      html += '<span class="sub">'+escapeHtml(numOnlyMon+(it.sub?' '+it.sub:''))+'</span><span class="prompt"></span>';
+    } else {
+      if(it.sub) html+='<span class="sub">'+escapeHtml(it.sub)+'</span>';
+      html += '<span class="prompt">'+escapeHtml(it.prompt)+'</span>';
+    }
     html += '<label class="later-chk"><input type="checkbox" data-mark="'+it.id+'"'+(marked?' checked':'')+'>後で見直す</label>';
     html += '</div>';
 
@@ -1580,9 +1586,10 @@
 
   function renderAnswerPane(problem){
     var html='';
+    var numOnly = !!NUM_ONLY_PROBLEMS[problem.id];
     problem.groups.forEach(function(g){
-      html += '<div class="mon-group"><div class="mon-title">'+escapeHtml(g.mon)+(g.note?'　'+escapeHtml(g.note):'')+'</div>';
-      g.items.forEach(function(it){ html+=renderQCard(it); });
+      html += '<div class="mon-group"><div class="mon-title">'+escapeHtml(g.mon)+(g.note&&!numOnly?'　'+escapeHtml(g.note):'')+'</div>';
+      g.items.forEach(function(it){ html+=renderQCard(it, numOnly?g.mon:null); });
       html += '</div>';
     });
     return html;
@@ -2231,7 +2238,7 @@
     problem.groups.forEach(function(g){
       g.items.forEach(function(it){
         html+='<div class="rq"><span class="sub">'+escapeHtml(g.mon)+(it.sub?' '+it.sub:'')+'</span>';
-        html+='<div class="prompt">'+escapeHtml(it.prompt)+'</div>';
+        if(!NUM_ONLY_PROBLEMS[problem.id]) html+='<div class="prompt">'+escapeHtml(it.prompt)+'</div>';
         html+='<div class="ans-label">あなたの解答</div>';
         if(it.type==="text"){
           var v=answersSrc[it.id];
